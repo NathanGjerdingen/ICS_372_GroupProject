@@ -1,3 +1,7 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,15 @@ public class Buisness implements Serializable{
 	
 	public void save() {
 		//TODO: Implement save
+		try {
+			FileOutputStream file = new FileOutputStream("ICS372BuisnessExample");
+			ObjectOutputStream output = new ObjectOutputStream(file);
+			//Write the current class object to file
+			output.writeObject(this.getClass());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
