@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Buisness implements Serializable{
+public class Business implements Serializable{
 
 	private List customerList = new ArrayList();
 	private List modelList = new ArrayList();
