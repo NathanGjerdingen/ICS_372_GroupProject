@@ -18,8 +18,6 @@ public class Business implements Serializable{
 		//TODO: Implement adding a customer
 	}
 	
-	//This is a test to see changes!
-	
 	public void addAModel(String brand, String modelName, double price) {
 		//TODO: Implement add a model
 	}
