@@ -10,6 +10,8 @@ public class Business implements Serializable{
 
 	private List customerList = new ArrayList();
 	private List modelList = new ArrayList();
+	private List holdList = new ArrayList();
+	
 	private double totalSales = 0;
 	
 	public void addACustomer(String name, int phoneNumber) {
