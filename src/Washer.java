@@ -4,6 +4,7 @@ public class Washer {
 	private String brand;
 	private String modelName;
 	private double price;
+	private int stock;
 
 	public Washer(String brand, String modelName, double price) {
 		// TODO Auto-generated constructor stub
@@ -31,6 +32,14 @@ public class Washer {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = this.stock + stock;
 	}
 
 
