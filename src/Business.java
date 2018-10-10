@@ -9,23 +9,41 @@ import java.util.List;
 public class Business implements Serializable{
 
 	private List<Customer> customerList = new ArrayList<Customer>();
-	private List modelList = new ArrayList();
+	private List<Washer> modelList = new ArrayList();
 	private List holdList = new ArrayList();
 	private int customerID = 0001;
 	
 	private double totalSales = 0;
 	
-	public void addACustomer(String name, int phoneNumber) {
+	public boolean addACustomer(String name, int phoneNumber) {
 		//TODO: Implement adding a customer
+		for(Customer customer : customerList) {
+			if(customer.getName().equals(name) && customer.getGetPhoneNumber() == phoneNumber) {
+				System.out.println("This name: " + name +" and phone number: " + phoneNumber + " are already customers in the system.");
+				return false;
+			}
+		}
 		Customer newCustomer = new Customer(name,phoneNumber, customerID);
 		customerID++;
 		customerList.add(newCustomer);
+		return true;
 		
 	}
 	
-	public void addAModel(String brand, String modelName, double price) {
+	public boolean addAModel(String brand, String modelName, double price) {
 		//TODO: Implement add a model
+		//iterate through the list of washer objects in modelList and check if it is 
+		//already present, if it is let the user know and print out the statement
+		for(Washer washer : modelList) {
+			if(washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
+				System.out.println("This brand:" + brand +" and model:" + modelName + " are already in the catalogue of washers.");
+				return false;
+			}
+		}
+		
 		Washer newWasher = new Washer(brand, modelName, price);
+		modelList.add(newWasher);
+		return true;
 		
 	}
 	
