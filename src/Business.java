@@ -8,18 +8,25 @@ import java.util.List;
 
 public class Business implements Serializable{
 
-	private List customerList = new ArrayList();
+	private List<Customer> customerList = new ArrayList<Customer>();
 	private List modelList = new ArrayList();
 	private List holdList = new ArrayList();
+	private int customerID = 0001;
 	
 	private double totalSales = 0;
 	
 	public void addACustomer(String name, int phoneNumber) {
 		//TODO: Implement adding a customer
+		Customer newCustomer = new Customer(name,phoneNumber, customerID);
+		customerID++;
+		customerList.add(newCustomer);
+		
 	}
 	
 	public void addAModel(String brand, String modelName, double price) {
 		//TODO: Implement add a model
+		Washer newWasher = new Washer(brand, modelName, price);
+		
 	}
 	
 	public void addToInventory(String brand, String modelName, int quantity) {
