@@ -6,120 +6,130 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Business implements Serializable{
+public class Business implements Serializable {
 
 	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Washer> modelList = new ArrayList<Washer>();
 	private List<Hold> holdList = new ArrayList<Hold>();
 	private int customerID = 0001;
 	private double totalSales = 0;
-	
+
 	/**
-	 * Takes a name and phone number, then checks if this customer is already in the list.
-	 * If the customer is already in the list it notifies the user and does not enter them.
-	 * If the user isn't already added in the list it creates the customer and stores them
-	 * in the customer list.
+	 * Takes a name and phone number, then checks if this customer is already in the
+	 * list. If the customer is already in the list it notifies the user and does
+	 * not enter them. If the user isn't already added in the list it creates the
+	 * customer and stores them in the customer list.
+	 * 
 	 * @param name
 	 * @param phoneNumber
 	 * @return String replying if it was successful or not
 	 */
 	public String addACustomer(String name, int phoneNumber) {
-		for(Customer customer : customerList) {
-			if(customer.getName().equals(name) && customer.getGetPhoneNumber() == phoneNumber) {
-				//Fail
-				return "This name: " + name +" and phone number: " + phoneNumber + " is already customers in the system. "
-						+ "Their ID is: " + customer.getCustomerID();
+		for (Customer customer : customerList) {
+			if (customer.getName().equals(name) && customer.getGetPhoneNumber() == phoneNumber) {
+				// Fail
+				return "This name: " + name + " and phone number: " + phoneNumber
+						+ " is already customers in the system. " + "Their ID is: " + customer.getCustomerID();
 			}
 		}
-		Customer newCustomer = new Customer(name,phoneNumber, customerID);
+		Customer newCustomer = new Customer(name, phoneNumber, customerID);
 		customerID++;
 		customerList.add(newCustomer);
-		//Success
+		// Success
 		return "The customer has been added, their ID is: " + newCustomer.getCustomerID();
-		
+
 	}
+
 	/**
-	 * Takes a brand, model name, and price for a specific model of washer
-	 * It then checks if it is already in the list of washers and notifies the user if it is.
-	 * If the washer is not in the list it is added to the modelList
+	 * Takes a brand, model name, and price for a specific model of washer It then
+	 * checks if it is already in the list of washers and notifies the user if it
+	 * is. If the washer is not in the list it is added to the modelList
+	 * 
 	 * @param brand
 	 * @param modelName
 	 * @param price
 	 * @return String if it was successful or not
 	 */
 	public String addAModel(String brand, String modelName, double price) {
-		//TODO: Implement add a model
-		//iterate through the list of washer objects in modelList and check if it is 
-		//already present, if it is let the user know and print out the statement
-		for(Washer washer : modelList) {
-			if(washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
-				//fail
-				return "The brand:" + brand +" and model:" + modelName + " is already in the catalogue of washers.";
+		// TODO: Implement add a model
+		// iterate through the list of washer objects in modelList and check if it is
+		// already present, if it is let the user know and print out the statement
+		for (Washer washer : modelList) {
+			if (washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
+				// fail
+				return "The brand:" + brand + " and model:" + modelName + " is already in the catalogue of washers.";
 			}
 		}
-		
+
 		Washer newWasher = new Washer(brand, modelName, price);
 		modelList.add(newWasher);
-		//Success
+		// Success
 		return "The brand: " + brand + " and model: " + modelName + " has been added to the list of washers.";
-		
+
 	}
+
 	/**
-	 * Checks to see if the brand and model is in the washer list
-	 * if it is it sets the quantity available for the washer then
-	 * checks the hold list for holds on that washer and fulfills them.
+	 * Checks to see if the brand and model is in the washer list if it is it sets
+	 * the quantity available for the washer then checks the hold list for holds on
+	 * that washer and fulfills them.
+	 * 
 	 * @param brand
 	 * @param modelName
 	 * @param quantity
 	 * @return String if it was successful or not
 	 */
 	public String addToInventory(String brand, String modelName, int quantity) {
-		for(Washer washer : modelList) {
-			if(washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
+		for (Washer washer : modelList) {
+			if (washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
 				washer.setStock(quantity);
-				for(Hold hold : holdList) {
-					//TODO: Implement hold list and class fully
+				for (Hold hold : holdList) {
+					// TODO: Implement hold list and class fully
 				}
-				//Success
+				// Success
 				return "The inventory has been added.";
 			}
 		}
-		//Fail
+		// Fail
 		return "The brand: " + brand + " or model: " + modelName + " is not valid and no inventory has been added";
 	}
+
 	/**
-	 * Checks to see if the customerID give is a valid customer. If it is, it checks that the brand and model
-	 * of the washer is valid. If it is it checks the stock of the washer compared to the quantity requested.
-	 * If the stock is greater than or equal to the quantity requested it reduces the stock by quantity
-	 * and adds the price * quantity of the washers to total sales. If the quantity is not sufficient, it sells
-	 * what it can and creates a hold for the given washer model to be fulfilled at a later date.
+	 * Checks to see if the customerID give is a valid customer. If it is, it checks
+	 * that the brand and model of the washer is valid. If it is it checks the stock
+	 * of the washer compared to the quantity requested. If the stock is greater
+	 * than or equal to the quantity requested it reduces the stock by quantity and
+	 * adds the price * quantity of the washers to total sales. If the quantity is
+	 * not sufficient, it sells what it can and creates a hold for the given washer
+	 * model to be fulfilled at a later date.
+	 * 
 	 * @param brand
 	 * @param modelName
 	 * @param quantity
 	 * @param customerID
 	 */
 	public void purchase(String brand, String modelName, int quantity, int customerID) {
-		//TODO: Implement purchase
-		//check that the customer is inside the customer list via ID
-		for(Customer customer : customerList) {
-			if(customer.getCustomerID() == customerID) {
-				//Check that the brand and model is in the modelList
-				for(Washer washer : modelList) {
-					if(washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
-						//If the washer Stock is greater than or equal to the quantity requested
-						if(washer.getStock() >= quantity) {
-							//set the washer stock to washer stock - quantity requested, 
-							//then set total sales to totalSales + the washers price and quantity requested
+		// TODO: Implement purchase
+		// check that the customer is inside the customer list via ID
+		for (Customer customer : customerList) {
+			if (customer.getCustomerID() == customerID) {
+				// Check that the brand and model is in the modelList
+				for (Washer washer : modelList) {
+					if (washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
+						// If the washer Stock is greater than or equal to the quantity requested
+						if (washer.getStock() >= quantity) {
+							// set the washer stock to washer stock - quantity requested,
+							// then set total sales to totalSales + the washers price and quantity requested
 							washer.setStock(washer.getStock() - quantity);
-							totalSales = totalSales +(washer.getPrice() * quantity);
-						}else {
-							//else if the stock is less than the quantity requested. 
-							//Quantity is equal to quantity requested minus the stock available to be fulfilled
+							totalSales = totalSales + (washer.getPrice() * quantity);
+						} else {
+							// else if the stock is less than the quantity requested.
+							// Quantity is equal to quantity requested minus the stock available to be
+							// fulfilled
 							quantity = quantity - washer.getStock();
 							totalSales = totalSales + (washer.getPrice() - quantity);
-							//set the washer stock to zero to indicate the quantity removed
+							// set the washer stock to zero to indicate the quantity removed
 							washer.setStock(0);
-							//Create a hold storing the customer that requested it and the washer requested
+							// Create a hold storing the customer that requested it and the washer requested
 							Hold newHold = new Hold(customer, washer);
 							holdList.add(newHold);
 						}
@@ -128,56 +138,63 @@ public class Business implements Serializable{
 			}
 		}
 	}
+
 	/**
 	 * Creates a string of the customers in the customer list.
+	 * 
 	 * @return Customer List
 	 */
 	public String listCustomers() {
-		//for customers in the customer list, print out name, phone number, and ID
+		// for customers in the customer list, print out name, phone number, and ID
 		String customers = "";
-		for(Customer customer : customerList) {
+		for (Customer customer : customerList) {
 			customers = customers + "Customer Name: " + customer.getName() + " Phone Number: "
-		+ customer.getGetPhoneNumber() + " ID " + customer.getCustomerID() + "\n";
+					+ customer.getGetPhoneNumber() + " ID " + customer.getCustomerID() + "\n";
 		}
-		//return the string of customers
+		// return the string of customers
 		return customers;
 	}
+
 	/**
 	 * Creates a string of the washers in the washer list.
+	 * 
 	 * @return Washer List
 	 */
 	public String listWashers() {
-		//for washers in the washer list, print out the brand, model, price, and stock
+		// for washers in the washer list, print out the brand, model, price, and stock
 		String washerList = "";
-		for(Washer washer : modelList) {
-			washerList = washerList + "Washer Brand: " + washer.getBrand() + " Model: " + washer.getModelName() 
-			+ " Price: " + washer.getPrice() + " Stock: " + washer.getStock();
+		for (Washer washer : modelList) {
+			washerList = washerList + "Washer Brand: " + washer.getBrand() + " Model: " + washer.getModelName()
+					+ " Price: " + washer.getPrice() + " Stock: " + washer.getStock();
 		}
-		//Return the list of washers
+		// Return the list of washers
 		return washerList;
 	}
+
 	/**
 	 * Returns a string containing the total sales
+	 * 
 	 * @return TotalSales
 	 */
 	public String displayTotalSales() {
-		//Displays the total sales 
+		// Displays the total sales
 		return "The total sales is: " + totalSales;
 	}
+
 	/**
 	 * saves the current business object to disk
 	 */
 	public void save() {
-		//TODO: Implement save
+		// TODO: Implement save
 		try {
 			FileOutputStream file = new FileOutputStream("ICS372BuisnessExample");
 			ObjectOutputStream output = new ObjectOutputStream(file);
-			//Write the current class object to file
+			// Write the current class object to file
 			output.writeObject(this.getClass());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 }
