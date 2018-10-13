@@ -103,7 +103,7 @@ public class Washer {
 	
 	/**
 	 * Method to determine if Washers are the "same". This method looks 
-	 * at brand name and modleName to determine "sameness". 
+	 * at brand and modleName to determine "sameness". 
 	 * 
 	 * @param Washer o
 	 * @return true if Washers are the same.

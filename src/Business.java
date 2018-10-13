@@ -41,7 +41,7 @@ public class Business implements Serializable {
 	}
 
 	/**
-	 * Takes a brand, model name, and price for a specific model of washer It then
+	 * Takes a brand, model name, and price for a specific model of washer. It then
 	 * checks if it is already in the list of washers and notifies the user if it
 	 * is. If the washer is not in the list it is added to the modelList
 	 * 
@@ -54,24 +54,23 @@ public class Business implements Serializable {
 		// TODO: Implement add a model
 		// iterate through the list of washer objects in modelList and check if it is
 		// already present, if it is let the user know and print out the statement
+		Washer targetWasher = new Washer(brand, modelName, price);
 		for (Washer washer : modelList) {
-			if (washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
+			if (washer.equals(targetWasher)) {
 				// fail
 				return "The brand:" + brand + " and model:" + modelName + " is already in the catalogue of washers.";
 			}
 		}
-
-		Washer newWasher = new Washer(brand, modelName, price);
-		modelList.add(newWasher);
+		modelList.add(targetWasher);
 		// Success
 		return "The brand: " + brand + " and model: " + modelName + " has been added to the list of washers.";
 
 	}
 
 	/**
-	 * Checks to see if the brand and model is in the washer list if it is it sets
-	 * the quantity available for the washer then checks the hold list for holds on
-	 * that washer and fulfills them.
+	 * Checks to see if the target brand and model is in the washer list. If it is, 
+	 * it sets adds a quantity to the available washer's stock. Then checks the hold 
+	 * list for holds on that washer and fulfills them.
 	 * 
 	 * @param brand
 	 * @param modelName
@@ -79,9 +78,10 @@ public class Business implements Serializable {
 	 * @return String if it was successful or not
 	 */
 	public String addToInventory(String brand, String modelName, int quantity) {
+		Washer targetWasher = new Washer(brand, modelName, 0);
 		for (Washer washer : modelList) {
-			if (washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
-				washer.setStock(quantity);
+			if (washer.equals(targetWasher)){
+				washer.setStock(quantity + washer.getStock());
 				for (Hold hold : holdList) {
 					// TODO: Implement hold list and class fully
 				}
@@ -110,11 +110,12 @@ public class Business implements Serializable {
 	public void purchase(String brand, String modelName, int quantity, int customerID) {
 		// TODO: Implement purchase
 		// check that the customer is inside the customer list via ID
+		Washer targetWasher = new Washer (brand, modelName, 0);
 		for (Customer customer : customerList) {
 			if (customer.getCustomerID() == customerID) {
 				// Check that the brand and model is in the modelList
 				for (Washer washer : modelList) {
-					if (washer.getBrand().equals(brand) && washer.getModelName().equals(modelName)) {
+					if (washer.equals(targetWasher)) {
 						// If the washer Stock is greater than or equal to the quantity requested
 						if (washer.getStock() >= quantity) {
 							// set the washer stock to washer stock - quantity requested,
