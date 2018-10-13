@@ -30,6 +30,20 @@ public class Washer {
 	}
 	
 	/**
+	 * Overloaded constructor for washer. Mainly used for checking 
+	 * if to washers are equal to each other in Business class.
+	 * 
+	 * @param brand
+	 * @param modelName
+	 */
+	public Washer(String brand, String modelName) {
+		this.brand = brand;
+		this.modelName = modelName;
+		this.price = 0;
+		this.stock = 1;
+	}
+	
+	/**
 	 * Get brand name from Washer.
 	 * 
 	 * @return brand

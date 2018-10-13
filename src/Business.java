@@ -78,7 +78,7 @@ public class Business implements Serializable {
 	 * @return String if it was successful or not
 	 */
 	public String addToInventory(String brand, String modelName, int quantity) {
-		Washer targetWasher = new Washer(brand, modelName, 0);
+		Washer targetWasher = new Washer(brand, modelName);
 		for (Washer washer : modelList) {
 			if (washer.equals(targetWasher)){
 				washer.setStock(quantity + washer.getStock());
@@ -110,7 +110,7 @@ public class Business implements Serializable {
 	public void purchase(String brand, String modelName, int quantity, int customerID) {
 		// TODO: Implement purchase
 		// check that the customer is inside the customer list via ID
-		Washer targetWasher = new Washer (brand, modelName, 0);
+		Washer targetWasher = new Washer (brand, modelName);
 		for (Customer customer : customerList) {
 			if (customer.getCustomerID() == customerID) {
 				// Check that the brand and model is in the modelList
