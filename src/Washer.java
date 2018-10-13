@@ -122,8 +122,8 @@ public class Washer {
 	 * @param Washer o
 	 * @return true if Washers are the same.
 	 */
-	public boolean equals(Washer o){
-		if (this.brand == o.getBrand() && this.modelName == o.modelName){
+	public boolean equals(Washer w){
+		if (this.brand == w.getBrand() && this.modelName == w.modelName){
 			return true;
 		} 
 		return false;
