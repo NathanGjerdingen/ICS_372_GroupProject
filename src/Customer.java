@@ -71,5 +71,19 @@ public class Customer {
 	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
+	
+	/**
+	 * Method to determine if Customers are the "same". this method 
+	 * looks at name and phoneNumber to determine "sameness".
+	 * 
+	 * @param c
+	 * @return
+	 */
+	public boolean equals(Customer c) {
+		if (this.getName() == c.getName() && this.getGetPhoneNumber() == c.getGetPhoneNumber()) {
+			return true;
+		}
+		return false;
+	}
 
 }
