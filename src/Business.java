@@ -25,18 +25,19 @@ public class Business implements Serializable {
 	 * @return String replying if it was successful or not
 	 */
 	public String addACustomer(String name, int phoneNumber) {
+		Customer targetCustomer = new Customer(name, phoneNumber, 0000);
 		for (Customer customer : customerList) {
-			if (customer.getName().equals(name) && customer.getGetPhoneNumber() == phoneNumber) {
+			if (customer.equals(targetCustomer)) {
 				// Fail
 				return "This name: " + name + " and phone number: " + phoneNumber
 						+ " is already customers in the system. " + "Their ID is: " + customer.getCustomerID();
 			}
 		}
-		Customer newCustomer = new Customer(name, phoneNumber, customerID);
 		customerID++;
-		customerList.add(newCustomer);
+		targetCustomer.setCustomerID(customerID);
+		customerList.add(targetCustomer);
 		// Success
-		return "The customer has been added, their ID is: " + newCustomer.getCustomerID();
+		return "The customer has been added, their ID is: " + targetCustomer.getCustomerID();
 
 	}
 
