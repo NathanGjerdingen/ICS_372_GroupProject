@@ -1,4 +1,10 @@
-
+/**
+ * Class to represent the Customers. Attributes: custPHoneNumber, name,
+ * customerID
+ * 
+ * @author Sang Ngo
+ *
+ */
 public class Customer {
 
 	private int custPhoneNumber;
@@ -16,6 +22,19 @@ public class Customer {
 		this.name = name;
 		custPhoneNumber = phoneNumber;
 		this.customerID = customerID;
+	}
+
+	/**
+	 * Overloaded constructor with only name and phone number. The customers ID gets
+	 * default to 0
+	 * 
+	 * @param name
+	 * @param phoneNumber
+	 */
+	public Customer(String name, int phoneNumber) {
+		this.name = name;
+		custPhoneNumber = phoneNumber;
+		this.customerID = 0;
 	}
 
 	/**
@@ -71,10 +90,10 @@ public class Customer {
 	public void setCustomerID(int customerID) {
 		this.customerID = customerID;
 	}
-	
+
 	/**
-	 * Method to determine if Customers are the "same". this method 
-	 * looks at name and phoneNumber to determine "sameness".
+	 * Method to determine if Customers are the "same". this method looks at name
+	 * and phoneNumber to determine "sameness".
 	 * 
 	 * @param c
 	 * @return
