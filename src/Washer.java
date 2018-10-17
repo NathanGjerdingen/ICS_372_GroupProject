@@ -119,11 +119,11 @@ public class Washer {
 	 * Method to determine if Washers are the "same". This method looks 
 	 * at brand and modleName to determine "sameness". 
 	 * 
-	 * @param Washer o
+	 * @param Washer w
 	 * @return true if Washers are the same.
 	 */
 	public boolean equals(Washer w){
-		if (this.brand == w.getBrand() && this.modelName == w.getModelName()){
+		if (this.brand.equals(w.getBrand()) && this.modelName.equals(w.getModelName())){
 			return true;
 		} 
 		return false;
