@@ -112,7 +112,7 @@ public class Washer {
 	 * @param stock
 	 */
 	public void setStock(int stock) {
-		this.stock = this.stock + stock;
+		this.stock = stock;
 	}
 	
 	/**

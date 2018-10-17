@@ -109,8 +109,16 @@ public class Business implements Serializable {
 						}
 						// If the hold is satisfied remove it from the hold list
 						if (hold.getQuantityRequested() == 0) {
-
+							// TODO: ISSUE BELOW
+							// We are removing elements from the holdList while
+							// we are looping through the holdList. If we 
+							// remove the only element in a list, the method
+							// will attempt to continue iterating after the
+							// list goes to null.
 							holdList.remove(holdList.indexOf(hold));
+							// TODO: SOLUTION TO ISSUE
+							// we need to implement removing items from the
+							// hold list outside of the Hold loop.
 						}
 					}
 				}
