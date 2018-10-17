@@ -112,9 +112,8 @@ public class Business implements Serializable {
 							// TODO: ISSUE BELOW
 							// We are removing elements from the holdList while
 							// we are looping through the holdList. If we 
-							// remove the only element in a list, the method
-							// will attempt to continue iterating after the
-							// list goes to null.
+							// remove the element in a list, the method will 
+							// fail to iterate again because the list has changed.
 							holdList.remove(holdList.indexOf(hold));
 							// TODO: SOLUTION TO ISSUE
 							// we need to implement removing items from the
