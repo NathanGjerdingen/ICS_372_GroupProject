@@ -1,5 +1,9 @@
 /Business.class
 /Customer.class
 /Hold.class
+<<<<<<< HEAD
 /UserInterface.class
+=======
+>>>>>>> 4eb34dbb2011cd97ba3aac867def389308ed9fda
 /Washer.class
+/UserInterface.class

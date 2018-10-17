@@ -19,10 +19,11 @@ public class Business implements Serializable {
 	private List<Hold> holdList = new ArrayList<Hold>();
 	private int customerID = 0001;
 	private double totalSales = 0;
-
-	public Business() {
-
+	
+	public Business(){
+		
 	}
+
 
 	/**
 	 * Takes a name and phone number, then checks if this customer is already in the
