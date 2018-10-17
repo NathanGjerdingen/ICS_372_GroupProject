@@ -6,6 +6,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Nathan C. Bishop
+ *
+ */
+
 public class Business implements Serializable {
 
 	private List<Customer> customerList = new ArrayList<Customer>();
@@ -13,9 +19,9 @@ public class Business implements Serializable {
 	private List<Hold> holdList = new ArrayList<Hold>();
 	private int customerID = 0001;
 	private double totalSales = 0;
-	
-	public Business(){
-		
+
+	public Business() {
+
 	}
 
 	/**
@@ -73,8 +79,8 @@ public class Business implements Serializable {
 	}
 
 	/**
-	 * Checks to see if the target brand and model is in the washer list. If it is, 
-	 * it sets adds a quantity to the available washer's stock. Then checks the hold 
+	 * Checks to see if the target brand and model is in the washer list. If it is,
+	 * it sets adds a quantity to the available washer's stock. Then checks the hold
 	 * list for holds on that washer and fulfills them.
 	 * 
 	 * @param brand
@@ -85,10 +91,27 @@ public class Business implements Serializable {
 	public String addToInventory(String brand, String modelName, int quantity) {
 		Washer targetWasher = new Washer(brand, modelName);
 		for (Washer washer : modelList) {
-			if (washer.equals(targetWasher)){
+			if (washer.equals(targetWasher)) {
 				washer.setStock(quantity + washer.getStock());
 				for (Hold hold : holdList) {
 					// TODO: Implement hold list and class fully
+					if (hold.getWasher().equals(washer) && washer.getStock() > 0) {
+						// While the stock of the washer is greater than zero and the hold quantity
+						// requested is above zero
+						while (washer.getStock() > 0 && hold.getQuantityRequested() > 0) {
+							// Total sales = total sales + the washer price
+							totalSales = totalSales + washer.getPrice();
+							// set the stock of the washer -1 to indicate we have sold it
+							washer.setStock(washer.getStock() - 1);
+							// fulfill the hold by decreasing the quantity requested
+							hold.setQuantityRequested(hold.getQuantityRequested() - 1);
+						}
+						// If the hold is satisfied remove it from the hold list
+						if (hold.getQuantityRequested() == 0) {
+
+							holdList.remove(holdList.indexOf(hold));
+						}
+					}
 				}
 				// Success
 				return "The inventory has been added.";
@@ -115,7 +138,7 @@ public class Business implements Serializable {
 	public void purchase(String brand, String modelName, int quantity, int customerID) {
 		// TODO: Implement purchase
 		// check that the customer is inside the customer list via ID
-		Washer targetWasher = new Washer (brand, modelName);
+		Washer targetWasher = new Washer(brand, modelName);
 		for (Customer customer : customerList) {
 			if (customer.getCustomerID() == customerID) {
 				// Check that the brand and model is in the modelList
@@ -132,11 +155,12 @@ public class Business implements Serializable {
 							// Quantity is equal to quantity requested minus the stock available to be
 							// fulfilled
 							quantity = quantity - washer.getStock();
-							totalSales = totalSales + (washer.getPrice() - quantity);
+							totalSales = totalSales + (washer.getPrice() * washer.getStock());
 							// set the washer stock to zero to indicate the quantity removed
 							washer.setStock(0);
 							// Create a hold storing the customer that requested it and the washer requested
-							Hold newHold = new Hold(customer, washer);
+							// with the quantity that they want after fulfilling what you can
+							Hold newHold = new Hold(customer, washer, quantity);
 							holdList.add(newHold);
 						}
 					}

@@ -123,7 +123,7 @@ public class Washer {
 	 * @return true if Washers are the same.
 	 */
 	public boolean equals(Washer w){
-		if (this.brand == w.getBrand() && this.modelName == w.modelName){
+		if (this.brand == w.getBrand() && this.modelName == w.getModelName()){
 			return true;
 		} 
 		return false;

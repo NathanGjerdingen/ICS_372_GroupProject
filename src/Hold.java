@@ -3,10 +3,12 @@ public class Hold {
 
 	private Customer customer;
 	private Washer washer;
-	
-	public Hold(Customer customer, Washer washer) {
+	private int quantityRequested;
+
+	public Hold(Customer customer, Washer washer, int quantityRequested) {
 		this.customer = customer;
 		this.washer = washer;
+		this.setQuantityRequested(quantityRequested);
 	}
 
 	public Customer getCustomer() {
@@ -23,6 +25,14 @@ public class Hold {
 
 	public void setWasher(Washer washer) {
 		this.washer = washer;
+	}
+
+	public int getQuantityRequested() {
+		return quantityRequested;
+	}
+
+	public void setQuantityRequested(int quantityRequested) {
+		this.quantityRequested = quantityRequested;
 	}
 
 }
