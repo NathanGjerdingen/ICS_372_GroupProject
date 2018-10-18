@@ -12,7 +12,6 @@ import java.util.List;
  * @author Nathan Gjeridngen
  * @author Sang Ngo
  */
-
 public class Business implements Serializable {
 
 	private List<Customer> customerList = new ArrayList<Customer>();
@@ -41,7 +40,8 @@ public class Business implements Serializable {
 			if (customer.equals(targetCustomer)) {
 				// Fail
 				return "This name: " + name + " and phone number: " + phoneNumber
-						+ " is already customers in the system. " + "Their ID is: " + customer.getCustomerID();
+						+ " is already customers in the system. " + "Their ID is: " 
+						+ customer.getCustomerID();
 			}
 		}
 		customerID++;
@@ -70,12 +70,12 @@ public class Business implements Serializable {
 		for (Washer washer : modelList) {
 			if (washer.equals(targetWasher)) {
 				// fail
-				return "The brand:" + brand + " and model:" + modelName + " is already in the catalogue of washers.";
+				return "The Brand: " + brand + ", Model: " + modelName + " is already in the catalogue of washers.";
 			}
 		}
 		modelList.add(targetWasher);
 		// Success
-		return "The brand: " + brand + " and model: " + modelName + " has been added to the list of washers.";
+		return "The Brand: " + brand + ", Model: " + modelName + " has been added to the list of washers.";
 
 	}
 
@@ -114,11 +114,11 @@ public class Business implements Serializable {
 					}
 				}
 				// Success
-				return "The inventory has been added.";
+				return "The inventory has been added.\n";
 			}
 		}
 		// Fail
-		return "The brand: " + brand + " or model: " + modelName + " is not valid and no inventory has been added";
+		return "The brand: " + brand + " or model: " + modelName + " is not valid. No inventory has been added.\n";
 	}
 
 	/**
@@ -177,8 +177,8 @@ public class Business implements Serializable {
 		// for customers in the customer list, print out name, phone number, and ID
 		String customers = "";
 		for (Customer customer : customerList) {
-			customers = customers + "Customer Name: " + customer.getName() + " Phone Number: "
-					+ customer.getGetPhoneNumber() + " ID " + customer.getCustomerID() + "\n";
+			customers = customers + "Customer Name: " + customer.getName() + ", Phone Number: "
+					+ customer.getGetPhoneNumber() + ", ID " + customer.getCustomerID();
 		}
 		// return the string of customers
 		return customers;
@@ -193,8 +193,8 @@ public class Business implements Serializable {
 		// for washers in the washer list, print out the brand, model, price, and stock
 		String washerList = "";
 		for (Washer washer : modelList) {
-			washerList = washerList + "Washer Brand: " + washer.getBrand() + " Model: " + washer.getModelName()
-					+ " Price: " + washer.getPrice() + " Stock: " + washer.getStock();
+			washerList = washerList + "Brand: " + washer.getBrand() + ", Model: " + washer.getModelName()
+					+ ", Price: $" + washer.getPrice() + ", Stock: " + washer.getStock() + "\n";
 		}
 		// Return the list of washers
 		return washerList;
@@ -207,7 +207,7 @@ public class Business implements Serializable {
 	 */
 	public String displayTotalSales() {
 		// Displays the total sales
-		return "The total sales is: " + totalSales;
+		return "The total sales is: $" + totalSales;
 	}
 
 	/**
