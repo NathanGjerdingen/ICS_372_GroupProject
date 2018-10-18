@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -9,7 +10,7 @@ import java.util.Queue;
  * @author Nathan Gjerdingen
  * @author Sang Ngo
  */
-public class Washer {
+public class Washer implements Serializable {
 
 	private String brand;
 	private String modelName;

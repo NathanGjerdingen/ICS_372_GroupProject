@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * Class to represent the Customers. Attributes: custPHoneNumber, name,
  * customerID
@@ -5,7 +7,7 @@
  * @author Sang Ngo
  *
  */
-public class Customer {
+public class Customer implements Serializable {
 
 	private int custPhoneNumber;
 	private String name;

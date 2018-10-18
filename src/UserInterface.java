@@ -1,12 +1,13 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class UserInterface {
 	private static UserInterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	private static Business Business = new Business();
+	private static Business Business;
 	private static final int EXIT = 0;
 	private static final int ADD_CUSTOMER = 1;
 	private static final int ADD_WASHER = 2;
@@ -22,10 +23,15 @@ public class UserInterface {
 	 * Made private for singleton pattern. Conditionally looks for any saved data.
 	 * Otherwise, it gets a singleton Library object.
 	 */
-	/*
-	 * private UserInterface() { if (yesOrNo("Look for saved data and  use it?")) {
-	 * retrieve(); } else { business = Business.instance(); } }
-	 */
+
+	private UserInterface() {
+		if (yesOrNo("Look for saved data and  use it?")) {
+			retrieve();
+		} else {
+			Business = Business.instance();
+		}
+	}
+
 	/**
 	 * Supports the singleton pattern
 	 * 
@@ -237,30 +243,43 @@ public class UserInterface {
 		result = Business.displayTotalSales();
 		System.out.println(result);
 	}
+
 	/**
 	 * Method to be called for saving the Business object. Uses the appropriate
 	 * Business method for saving.
 	 * 
 	 */
-	/*
-	 * private void save() { if (Business.save()) { System.out.
-	 * println(" The library has been successfully saved in the file BusinessData \n"
-	 * ); } else { System.out.println(" There has been an error in saving \n"); } }
-	 */
+
+	private void save() {
+		if (Business.save()) {
+			System.out.println(" The library has been successfully saved in the file BusinessData \n");
+		} else {
+			System.out.println(" There has been an error in saving \n");
+		}
+	}
+
 	/**
 	 * Method to be called for retrieving saved data. Uses the appropriate Business
 	 * method for retrieval.
 	 * 
 	 */
 
-	/*
-	 * private void retrieve() { try { if (Business == null) { Business =
-	 * Business.retrieve(); if (library != null) { System.out.
-	 * println(" The business has been successfully retrieved from the file LibraryData \n"
-	 * ); } else { System.out.println("File doesnt exist; creating new business");
-	 * Business = Business.instance(); } } } catch (Exception cnfe) {
-	 * cnfe.printStackTrace(); } }
-	 */
+	private void retrieve() {
+		try {
+			if (Business == null) {
+				Business = Business.retrieve();
+				if (Business != null) {
+					System.out.println(" The business has been successfully retrieved from the file LibraryData \n");
+				} else {
+					System.out.println("File doesnt exist; creating new business");
+					Business = Business.instance();
+				}
+			}
+		} catch (Exception cnfe) {
+			cnfe.printStackTrace();
+		}
+	}
+
 	/**
 	 * Orchestrates the whole process. Calls the appropriate method for the
 	 * different functionalities.
@@ -293,7 +312,7 @@ public class UserInterface {
 				displayTotal();
 				break;
 			case SAVE:
-				// save();
+				save();
 				break;
 			case HELP:
 				help();

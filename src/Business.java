@@ -1,6 +1,8 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,13 +18,24 @@ public class Business implements Serializable {
 
 	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Washer> modelList = new ArrayList<Washer>();
-	private List<Hold> holdList = new ArrayList<Hold>();
+	private static Business business;
 	private int customerID = 0001;
 	private double totalSales = 0;
 	
-	public Business(){
-		
+	private Business(){
 	}
+	/**
+     * Supports the singleton pattern
+     * 
+     * @return the singleton object
+     */
+    public static Business instance() {
+        if (business == null) {
+            return (business = new Business());
+        } else {
+            return business;
+        }
+    }
 	
 	/**
 	 * Takes a name and phone number, then checks if this customer is already in the
@@ -213,17 +226,34 @@ public class Business implements Serializable {
 	/**
 	 * saves the current business object to disk
 	 */
-	public void save() {
+	public boolean save() {
 		// TODO: Implement save
 		try {
 			FileOutputStream file = new FileOutputStream("ICS372BuisnessExample");
 			ObjectOutputStream output = new ObjectOutputStream(file);
 			// Write the current class object to file
 			output.writeObject(this.getClass());
+			file.close();
+			return true;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+			return false;
+		} 
 	}
 
+	public static Business retrieve() {
+		 try {
+	            FileInputStream file = new FileInputStream("ICS372BuisnessExample");
+	            ObjectInputStream input = new ObjectInputStream(file);
+	            Business business = (Business) input.readObject();
+	            return business;
+	        } catch (IOException ioe) {
+	            ioe.printStackTrace();
+	            return null;
+	        } catch (ClassNotFoundException cnfe) {
+	            cnfe.printStackTrace();
+	            return null;
+	        }
+	}
 }

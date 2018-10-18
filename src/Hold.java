@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * Class to create the Hold object when there is no stock available after an
  * order. Attributes are: customer, washer, quantityRequested
  *
  */
-public class Hold {
+public class Hold implements Serializable {
 
 	private Customer customer;
 	private Washer washer;
