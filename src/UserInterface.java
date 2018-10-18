@@ -160,7 +160,9 @@ public class UserInterface {
 	public void addCustomer() {
 		String name = getToken("Enter customer name");
 		int phone = getNumber("Enter phone number");
-		Business.addACustomer(name, phone);
+		String result;
+		result = Business.addACustomer(name, phone);
+		System.out.println(result);
 	}
 
 	/**
@@ -172,7 +174,9 @@ public class UserInterface {
 		String brand = getToken("Enter washer brand name");
 		String modelName = getToken("Enter model of washer");
 		double price = getDouble("Enter price of washer");
-		Business.addAModel(brand, modelName, price);
+		String result;
+		result = Business.addAModel(brand, modelName, price);
+		System.out.println(result);
 	}
 
 	/**
@@ -185,7 +189,9 @@ public class UserInterface {
 		String brand = getToken("Enter washer brand name");
 		String modelName = getToken("Enter model of washer");
 		int quantity = getNumber("Enter nubmer of washers");
-		Business.addToInventory(brand, modelName, quantity);
+		String result;
+		result = Business.addToInventory(brand, modelName, quantity);
+		System.out.println(result);
 	}
 
 	/**
@@ -207,7 +213,9 @@ public class UserInterface {
 	 * Business method to view customers
 	 */
 	public void listCustomers() {
-		Business.listCustomers();
+		String result;
+		result = Business.listCustomers();
+		System.out.println(result);
 	}
 
 	/**
@@ -215,7 +223,9 @@ public class UserInterface {
 	 * Business method to view washers
 	 */
 	public void listWashers() {
-		Business.listWashers();
+		String result;
+		result = Business.listWashers();
+		System.out.println(result);
 	}
 
 	/**
@@ -223,7 +233,9 @@ public class UserInterface {
 	 * Business method to display total sales
 	 */
 	public void displayTotal() {
-		Business.displayTotalSales();
+		String result;
+		result = Business.displayTotalSales();
+		System.out.println(result);
 	}
 	/**
 	 * Method to be called for saving the Business object. Uses the appropriate

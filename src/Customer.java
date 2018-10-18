@@ -99,7 +99,7 @@ public class Customer {
 	 * @return
 	 */
 	public boolean equals(Customer c) {
-		if (this.getName() == c.getName() && this.getGetPhoneNumber() == c.getGetPhoneNumber()) {
+		if (this.getName().equals(c.getName()) && this.getGetPhoneNumber() == c.getGetPhoneNumber()) {
 			return true;
 		}
 		return false;
