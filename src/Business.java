@@ -229,10 +229,10 @@ public class Business implements Serializable {
 	public boolean save() {
 		// TODO: Implement save
 		try {
-			FileOutputStream file = new FileOutputStream("ICS372BuisnessExample");
+			FileOutputStream file = new FileOutputStream("BusinessData");
 			ObjectOutputStream output = new ObjectOutputStream(file);
 			// Write the current class object to file
-			output.writeObject(this.getClass());
+			output.writeObject(business);
 			file.close();
 			return true;
 		} catch (IOException e) {
@@ -244,9 +244,10 @@ public class Business implements Serializable {
 
 	public static Business retrieve() {
 		 try {
-	            FileInputStream file = new FileInputStream("ICS372BuisnessExample");
+	            FileInputStream file = new FileInputStream("BusinessData");
 	            ObjectInputStream input = new ObjectInputStream(file);
-	            Business business = (Business) input.readObject();
+	            business = (Business) input.readObject();
+	            
 	            return business;
 	        } catch (IOException ioe) {
 	            ioe.printStackTrace();
