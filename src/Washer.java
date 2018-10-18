@@ -1,9 +1,13 @@
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Class to represent a Washing Machine. Attributes of the class 
  * are: brand, modelName, and price, and stock.
  * 
+ * @author Nathan C. Bishop
  * @author Nathan Gjerdingen
+ * @author Sang Ngo
  */
 public class Washer {
 
@@ -11,6 +15,8 @@ public class Washer {
 	private String modelName;
 	private double price;
 	private int stock;
+	
+    public Queue<Hold> holdQueueForWasher = new LinkedList<Hold>();
 	
 	/**
 	 * Washer takes in a brand, modelName, price when instantiated. 

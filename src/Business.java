@@ -9,7 +9,8 @@ import java.util.List;
 /**
  * 
  * @author Nathan C. Bishop
- *
+ * @author Nathan Gjeridngen
+ * @author Sang Ngo
  */
 
 public class Business implements Serializable {
@@ -23,8 +24,7 @@ public class Business implements Serializable {
 	public Business(){
 		
 	}
-
-
+	
 	/**
 	 * Takes a name and phone number, then checks if this customer is already in the
 	 * list. If the customer is already in the list it notifies the user and does
@@ -94,9 +94,9 @@ public class Business implements Serializable {
 		for (Washer washer : modelList) {
 			if (washer.equals(targetWasher)) {
 				washer.setStock(quantity + washer.getStock());
-				for (Hold hold : holdList) {
+				for (Hold hold : washer.holdQueueForWasher) {
 					// TODO: Implement hold list and class fully
-					if (hold.getWasher().equals(washer) && washer.getStock() > 0) {
+					if (washer.getStock() > 0) {
 						// While the stock of the washer is greater than zero and the hold quantity
 						// requested is above zero
 						while (washer.getStock() > 0 && hold.getQuantityRequested() > 0) {
@@ -109,15 +109,7 @@ public class Business implements Serializable {
 						}
 						// If the hold is satisfied remove it from the hold list
 						if (hold.getQuantityRequested() == 0) {
-							// TODO: ISSUE BELOW
-							// We are removing elements from the holdList while
-							// we are looping through the holdList. If we 
-							// remove the element in a list, the method will 
-							// fail to iterate again because the list has changed.
-							holdList.remove(holdList.indexOf(hold));
-							// TODO: SOLUTION TO ISSUE
-							// we need to implement removing items from the
-							// hold list outside of the Hold loop.
+							washer.holdQueueForWasher.remove(hold);
 						}
 					}
 				}
@@ -168,8 +160,7 @@ public class Business implements Serializable {
 							washer.setStock(0);
 							// Create a hold storing the customer that requested it and the washer requested
 							// with the quantity that they want after fulfilling what you can
-							Hold newHold = new Hold(customer, washer, quantity);
-							holdList.add(newHold);
+							washer.holdQueueForWasher.add(new Hold(customer, washer, quantity));
 						}
 					}
 				}
