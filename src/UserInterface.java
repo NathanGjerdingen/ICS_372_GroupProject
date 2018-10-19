@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class UserInterface {
@@ -48,7 +47,8 @@ public class UserInterface {
 	/**
 	 * Gets a token after prompting
 	 * 
-	 * @param prompt - whatever the user wants as prompt
+	 * @param prompt
+	 *            - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 * 
 	 */
@@ -70,7 +70,8 @@ public class UserInterface {
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
 	 * 
-	 * @param prompt The string to be prepended to the yes/no prompt
+	 * @param prompt
+	 *            The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 * 
 	 */
@@ -85,7 +86,8 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number
 	 * 
-	 * @param prompt the string for prompting
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the integer corresponding to the string
 	 * 
 	 */
@@ -104,7 +106,8 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number
 	 * 
-	 * @param prompt the string for prompting
+	 * @param prompt
+	 *            the string for prompting
 	 * @return the double corresponding to the string
 	 * 
 	 */
@@ -114,6 +117,25 @@ public class UserInterface {
 				String item = getToken(prompt);
 				Double number = Double.valueOf(item);
 				return number.doubleValue();
+			} catch (NumberFormatException nfe) {
+				System.out.println("Please input a number ");
+			}
+		} while (true);
+	}
+
+	/**
+	 * Gets the string entered.
+	 * 
+	 * @param prompt
+	 *            the string from the user
+	 * @return the string corresponding to the prompt
+	 */
+	public String getString(String prompt) {
+		do {
+			try {
+				String item = getToken(prompt);
+				String number = String.valueOf(item);
+				return number.toString();
 			} catch (NumberFormatException nfe) {
 				System.out.println("Please input a number ");
 			}
@@ -165,7 +187,7 @@ public class UserInterface {
 	 */
 	public void addCustomer() {
 		String name = getToken("Enter customer name");
-		int phone = getNumber("Enter phone number");
+		String phone = getString("Enter phone number");
 		String result;
 		result = Business.addACustomer(name, phone);
 		System.out.println(result);
@@ -324,7 +346,8 @@ public class UserInterface {
 	/**
 	 * The method to start the application. Simply calls process().
 	 * 
-	 * @param args not used
+	 * @param args
+	 *            not used
 	 */
 	public static void main(String[] args) {
 		UserInterface.instance().process();

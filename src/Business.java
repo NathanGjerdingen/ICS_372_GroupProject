@@ -1,5 +1,4 @@
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,22 +20,23 @@ public class Business implements Serializable {
 	private static Business business;
 	private int customerID = 0001;
 	private double totalSales = 0;
-	
-	private Business(){
+
+	private Business() {
 	}
+
 	/**
-     * Supports the singleton pattern
-     * 
-     * @return the singleton object
-     */
-    public static Business instance() {
-        if (business == null) {
-            return (business = new Business());
-        } else {
-            return business;
-        }
-    }
-	
+	 * Supports the singleton pattern
+	 * 
+	 * @return the singleton object
+	 */
+	public static Business instance() {
+		if (business == null) {
+			return (business = new Business());
+		} else {
+			return business;
+		}
+	}
+
 	/**
 	 * Takes a name and phone number, then checks if this customer is already in the
 	 * list. If the customer is already in the list it notifies the user and does
@@ -47,14 +47,13 @@ public class Business implements Serializable {
 	 * @param phoneNumber
 	 * @return String replying if it was successful or not
 	 */
-	public String addACustomer(String name, int phoneNumber) {
+	public String addACustomer(String name, String phoneNumber) {
 		Customer targetCustomer = new Customer(name, phoneNumber, 0000);
 		for (Customer customer : customerList) {
 			if (customer.equals(targetCustomer)) {
 				// Fail
 				return "This name: " + name + " and phone number: " + phoneNumber
-						+ " is already customers in the system. " + "Their ID is: " 
-						+ customer.getCustomerID();
+						+ " is already customers in the system. " + "Their ID is: " + customer.getCustomerID();
 			}
 		}
 		customerID++;
@@ -206,8 +205,8 @@ public class Business implements Serializable {
 		// for washers in the washer list, print out the brand, model, price, and stock
 		String washerList = "";
 		for (Washer washer : modelList) {
-			washerList = washerList + "Brand: " + washer.getBrand() + ", Model: " + washer.getModelName()
-					+ ", Price: $" + washer.getPrice() + ", Stock: " + washer.getStock() + "\n";
+			washerList = washerList + "Brand: " + washer.getBrand() + ", Model: " + washer.getModelName() + ", Price: $"
+					+ washer.getPrice() + ", Stock: " + washer.getStock() + "\n";
 		}
 		// Return the list of washers
 		return washerList;
@@ -239,22 +238,22 @@ public class Business implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-		} 
+		}
 	}
 
 	public static Business retrieve() {
-		 try {
-	            FileInputStream file = new FileInputStream("BusinessData");
-	            ObjectInputStream input = new ObjectInputStream(file);
-	            business = (Business) input.readObject();
-	            
-	            return business;
-	        } catch (IOException ioe) {
-	            ioe.printStackTrace();
-	            return null;
-	        } catch (ClassNotFoundException cnfe) {
-	            cnfe.printStackTrace();
-	            return null;
-	        }
+		try {
+			FileInputStream file = new FileInputStream("BusinessData");
+			ObjectInputStream input = new ObjectInputStream(file);
+			business = (Business) input.readObject();
+
+			return business;
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.printStackTrace();
+			return null;
+		}
 	}
 }

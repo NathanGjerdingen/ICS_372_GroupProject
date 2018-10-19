@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class Customer implements Serializable {
 
-	private int custPhoneNumber;
+	private String custPhoneNumber;
 	private String name;
 	private int customerID;
 
@@ -20,7 +20,7 @@ public class Customer implements Serializable {
 	 * @param phoneNumber
 	 * @param customerID
 	 */
-	public Customer(String name, int phoneNumber, int customerID) {
+	public Customer(String name, String phoneNumber, int customerID) {
 		this.name = name;
 		custPhoneNumber = phoneNumber;
 		this.customerID = customerID;
@@ -33,7 +33,7 @@ public class Customer implements Serializable {
 	 * @param name
 	 * @param phoneNumber
 	 */
-	public Customer(String name, int phoneNumber) {
+	public Customer(String name, String phoneNumber) {
 		this.name = name;
 		custPhoneNumber = phoneNumber;
 		this.customerID = 0;
@@ -44,7 +44,7 @@ public class Customer implements Serializable {
 	 * 
 	 * @return customer's phone number
 	 */
-	public int getGetPhoneNumber() {
+	public String getGetPhoneNumber() {
 		return custPhoneNumber;
 	}
 
@@ -53,7 +53,7 @@ public class Customer implements Serializable {
 	 * 
 	 * @param getPhoneNumber
 	 */
-	public void setGetPhoneNumber(int getPhoneNumber) {
+	public void setGetPhoneNumber(String getPhoneNumber) {
 		this.custPhoneNumber = getPhoneNumber;
 	}
 
