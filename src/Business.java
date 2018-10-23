@@ -48,6 +48,9 @@ public class Business implements Serializable {
 	 * @return String replying if it was successful or not
 	 */
 	public String addACustomer(String name, String phoneNumber) {
+		// cut off any extra space after name and phone number
+		name = name.trim();
+		phoneNumber = phoneNumber.trim();
 		Customer targetCustomer = new Customer(name, phoneNumber, 0000);
 		for (Customer customer : customerList) {
 			if (customer.equals(targetCustomer)) {
@@ -56,8 +59,9 @@ public class Business implements Serializable {
 						+ " is already customers in the system. " + "Their ID is: " + customer.getCustomerID();
 			}
 		}
-		customerID++;
+
 		targetCustomer.setCustomerID(customerID);
+		customerID++;
 		customerList.add(targetCustomer);
 		// Success
 		return "The customer has been added, their ID is: " + targetCustomer.getCustomerID();
@@ -190,7 +194,7 @@ public class Business implements Serializable {
 		String customers = "";
 		for (Customer customer : customerList) {
 			customers = customers + "Customer Name: " + customer.getName() + ", Phone Number: "
-					+ customer.getGetPhoneNumber() + ", ID " + customer.getCustomerID();
+					+ customer.getGetPhoneNumber() + ", ID " + customer.getCustomerID() + "\n";
 		}
 		// return the string of customers
 		return customers;
@@ -223,10 +227,10 @@ public class Business implements Serializable {
 	}
 
 	/**
-	 * saves the current business object to disk
+	 * saves the current business object to disk at the source folder under the name
+	 * BusinessData
 	 */
 	public boolean save() {
-		// TODO: Implement save
 		try {
 			FileOutputStream file = new FileOutputStream("BusinessData");
 			ObjectOutputStream output = new ObjectOutputStream(file);
@@ -241,6 +245,12 @@ public class Business implements Serializable {
 		}
 	}
 
+	/**
+	 * Returns a serialized business file from a previous execution and loads it. If
+	 * there is none it throws an exception and prints the stack trace
+	 * 
+	 * @return Saved Business class
+	 */
 	public static Business retrieve() {
 		try {
 			FileInputStream file = new FileInputStream("BusinessData");

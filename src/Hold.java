@@ -27,7 +27,7 @@ public class Hold implements Serializable {
 	/**
 	 * Gets the customer
 	 * 
-	 * @return
+	 * @return customer
 	 */
 	public Customer getCustomer() {
 		return customer;
@@ -63,7 +63,7 @@ public class Hold implements Serializable {
 	/**
 	 * Get quantity requested
 	 * 
-	 * @return
+	 * @return quantityRequested
 	 */
 	public int getQuantityRequested() {
 		return quantityRequested;

@@ -47,8 +47,7 @@ public class UserInterface {
 	/**
 	 * Gets a token after prompting
 	 * 
-	 * @param prompt
-	 *            - whatever the user wants as prompt
+	 * @param prompt - whatever the user wants as prompt
 	 * @return - the token from the keyboard
 	 * 
 	 */
@@ -70,8 +69,7 @@ public class UserInterface {
 	/**
 	 * Queries for a yes or no and returns true for yes and false for no
 	 * 
-	 * @param prompt
-	 *            The string to be prepended to the yes/no prompt
+	 * @param prompt The string to be prepended to the yes/no prompt
 	 * @return true for yes and false for no
 	 * 
 	 */
@@ -86,8 +84,7 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number
 	 * 
-	 * @param prompt
-	 *            the string for prompting
+	 * @param prompt the string for prompting
 	 * @return the integer corresponding to the string
 	 * 
 	 */
@@ -106,8 +103,7 @@ public class UserInterface {
 	/**
 	 * Converts the string to a number
 	 * 
-	 * @param prompt
-	 *            the string for prompting
+	 * @param prompt the string for prompting
 	 * @return the double corresponding to the string
 	 * 
 	 */
@@ -126,8 +122,7 @@ public class UserInterface {
 	/**
 	 * Gets the string entered.
 	 * 
-	 * @param prompt
-	 *            the string from the user
+	 * @param prompt the string from the user
 	 * @return the string corresponding to the prompt
 	 */
 	public String getString(String prompt) {
@@ -274,7 +269,7 @@ public class UserInterface {
 
 	private void save() {
 		if (Business.save()) {
-			System.out.println(" The library has been successfully saved in the file BusinessData \n");
+			System.out.println(" The business has been successfully saved in the file BusinessData \n");
 		} else {
 			System.out.println(" There has been an error in saving \n");
 		}
@@ -291,7 +286,7 @@ public class UserInterface {
 			if (Business == null) {
 				Business = Business.retrieve();
 				if (Business != null) {
-					System.out.println(" The business has been successfully retrieved from the file LibraryData \n");
+					System.out.println(" The business has been successfully retrieved from the file BusinessData \n");
 				} else {
 					System.out.println("File doesnt exist; creating new business");
 					Business = Business.instance();
@@ -346,8 +341,7 @@ public class UserInterface {
 	/**
 	 * The method to start the application. Simply calls process().
 	 * 
-	 * @param args
-	 *            not used
+	 * @param args not used
 	 */
 	public static void main(String[] args) {
 		UserInterface.instance().process();

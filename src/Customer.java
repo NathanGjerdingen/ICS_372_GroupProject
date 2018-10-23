@@ -101,7 +101,7 @@ public class Customer implements Serializable {
 	 * @return
 	 */
 	public boolean equals(Customer c) {
-		if (this.getName().equals(c.getName()) && this.getGetPhoneNumber() == c.getGetPhoneNumber()) {
+		if (this.getName().equals(c.getName()) && this.getGetPhoneNumber().equals(c.getGetPhoneNumber())) {
 			return true;
 		}
 		return false;

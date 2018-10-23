@@ -3,8 +3,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Class to represent a Washing Machine. Attributes of the class 
- * are: brand, modelName, and price, and stock.
+ * Class to represent a Washing Machine. Attributes of the class are: brand,
+ * modelName, and price, and stock.
  * 
  * @author Nathan C. Bishop
  * @author Nathan Gjerdingen
@@ -16,14 +16,13 @@ public class Washer implements Serializable {
 	private String modelName;
 	private double price;
 	private int stock;
-	
-    public Queue<Hold> holdQueueForWasher = new LinkedList<Hold>();
-	
+
+	public Queue<Hold> holdQueueForWasher = new LinkedList<Hold>();
+
 	/**
-	 * Washer takes in a brand, modelName, price when instantiated. 
-	 * Stock is set to 1 immediately, because when introducing a new
-	 * washer to the system you will likely be stocking it to at 
-	 * least 1.
+	 * Washer takes in a brand, modelName, price when instantiated. Stock is set to
+	 * 1 immediately, because when introducing a new washer to the system you will
+	 * likely be stocking it to at least 1.
 	 * 
 	 * @param brand
 	 * @param modelName
@@ -35,10 +34,10 @@ public class Washer implements Serializable {
 		this.price = price;
 		this.stock = 1;
 	}
-	
+
 	/**
-	 * Overloaded constructor for washer. Mainly used for checking 
-	 * if to washers are equal to each other in Business class.
+	 * Overloaded constructor for washer. Mainly used for checking if to washers are
+	 * equal to each other in Business class.
 	 * 
 	 * @param brand
 	 * @param modelName
@@ -49,7 +48,7 @@ public class Washer implements Serializable {
 		this.price = 0;
 		this.stock = 1;
 	}
-	
+
 	/**
 	 * Get brand name from Washer.
 	 * 
@@ -58,7 +57,7 @@ public class Washer implements Serializable {
 	public String getBrand() {
 		return brand;
 	}
-	
+
 	/**
 	 * Set new brand name for Washer.
 	 * 
@@ -67,7 +66,7 @@ public class Washer implements Serializable {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-	
+
 	/**
 	 * Get Model Name from Washer.
 	 * 
@@ -94,7 +93,7 @@ public class Washer implements Serializable {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	/**
 	 * Set new price to Washer.
 	 * 
@@ -112,7 +111,7 @@ public class Washer implements Serializable {
 	public int getStock() {
 		return stock;
 	}
-	
+
 	/**
 	 * set new Stock of Washer.
 	 * 
@@ -121,19 +120,19 @@ public class Washer implements Serializable {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
+
 	/**
-	 * Method to determine if Washers are the "same". This method looks 
-	 * at brand and modleName to determine "sameness". 
+	 * Method to determine if Washers are the "same". This method looks at brand and
+	 * modleName to determine "sameness".
 	 * 
 	 * @param Washer w
 	 * @return true if Washers are the same.
 	 */
-	public boolean equals(Washer w){
-		if (this.brand.equals(w.getBrand()) && this.modelName.equals(w.getModelName())){
+	public boolean equals(Washer w) {
+		if (this.brand.equals(w.getBrand()) && this.modelName.equals(w.getModelName())) {
 			return true;
-		} 
+		}
 		return false;
 	}
-	
+
 }
