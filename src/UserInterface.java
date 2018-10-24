@@ -3,10 +3,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/**
+ * class to implement a command line interface for washer business
+ * 
+ * @author Tyler Davis
+ *
+ */
 public class UserInterface {
 	private static UserInterface userInterface;
 	private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	private static Business Business;
+	private static Business business;
 	private static final int EXIT = 0;
 	private static final int ADD_CUSTOMER = 1;
 	private static final int ADD_WASHER = 2;
@@ -27,7 +33,7 @@ public class UserInterface {
 		if (yesOrNo("Look for saved data and  use it?")) {
 			retrieve();
 		} else {
-			Business = Business.instance();
+			business = business.instance();
 		}
 	}
 
@@ -95,7 +101,7 @@ public class UserInterface {
 				Integer number = Integer.valueOf(item);
 				return number.intValue();
 			} catch (NumberFormatException nfe) {
-				System.out.println("Please input a number ");
+				System.out.println("Please input a number");
 			}
 		} while (true);
 	}
@@ -114,7 +120,7 @@ public class UserInterface {
 				Double number = Double.valueOf(item);
 				return number.doubleValue();
 			} catch (NumberFormatException nfe) {
-				System.out.println("Please input a number ");
+				System.out.println("Please input a number");
 			}
 		} while (true);
 	}
@@ -179,12 +185,13 @@ public class UserInterface {
 	 * appropriate values and uses the appropriate Business method for adding the
 	 * customer.
 	 * 
+	 * @return return string value that gives user confirmation
 	 */
 	public void addCustomer() {
 		String name = getToken("Enter customer name");
 		String phone = getString("Enter phone number");
 		String result;
-		result = Business.addACustomer(name, phone);
+		result = business.addACustomer(name, phone);
 		System.out.println(result);
 	}
 
@@ -192,13 +199,14 @@ public class UserInterface {
 	 * Method to be called for adding a washer. Prompts the user for the appropriate
 	 * values and uses the appropriate Business method for adding the washer.
 	 * 
+	 * @return return string value that gives user confirmation
 	 */
 	public void addWasher() {
 		String brand = getToken("Enter washer brand name");
 		String modelName = getToken("Enter model of washer");
 		double price = getDouble("Enter price of washer");
 		String result;
-		result = Business.addAModel(brand, modelName, price);
+		result = business.addAModel(brand, modelName, price);
 		System.out.println(result);
 	}
 
@@ -207,13 +215,14 @@ public class UserInterface {
 	 * appropriate values and uses the appropriate Business method for adding to
 	 * inventory.
 	 * 
+	 * @return string value that gives user confirmation
 	 */
 	public void addToInventory() {
 		String brand = getToken("Enter washer brand name");
 		String modelName = getToken("Enter model of washer");
 		int quantity = getNumber("Enter number of washers");
 		String result;
-		result = Business.addToInventory(brand, modelName, quantity);
+		result = business.addToInventory(brand, modelName, quantity);
 		System.out.println(result);
 	}
 
@@ -228,36 +237,42 @@ public class UserInterface {
 		String modelName = getToken("Enter model of washer");
 		int quantity = getNumber("Enter number of washers");
 		int customerID = getNumber("Enter customer ID");
-		Business.purchase(brand, modelName, quantity, customerID);
+		business.purchase(brand, modelName, quantity, customerID);
 	}
 
 	/**
 	 * Method to be called for viewing list of customers. uses the appropriate
 	 * Business method to view customers
+	 * 
+	 * @return list of customers
 	 */
 	public void listCustomers() {
 		String result;
-		result = Business.listCustomers();
+		result = business.listCustomers();
 		System.out.println(result);
 	}
 
 	/**
 	 * Method to be called for viewing list of washers. uses the appropriate
 	 * Business method to view washers
+	 * 
+	 * @return list of washers
 	 */
 	public void listWashers() {
 		String result;
-		result = Business.listWashers();
+		result = business.listWashers();
 		System.out.println(result);
 	}
 
 	/**
 	 * Method to be called for displaying the total sales. uses the appropriate
 	 * Business method to display total sales
+	 * 
+	 * @return total sales
 	 */
 	public void displayTotal() {
 		String result;
-		result = Business.displayTotalSales();
+		result = business.displayTotalSales();
 		System.out.println(result);
 	}
 
@@ -268,10 +283,10 @@ public class UserInterface {
 	 */
 
 	private void save() {
-		if (Business.save()) {
-			System.out.println(" The business has been successfully saved in the file BusinessData \n");
+		if (business.save()) {
+			System.out.println("The business has been successfully saved in the file BusinessData \n");
 		} else {
-			System.out.println(" There has been an error in saving \n");
+			System.out.println("There has been an error in saving \n");
 		}
 	}
 
@@ -283,13 +298,13 @@ public class UserInterface {
 
 	private void retrieve() {
 		try {
-			if (Business == null) {
-				Business = Business.retrieve();
-				if (Business != null) {
+			if (business == null) {
+				business = business.retrieve();
+				if (business != null) {
 					System.out.println(" The business has been successfully retrieved from the file BusinessData \n");
 				} else {
 					System.out.println("File doesnt exist; creating new business");
-					Business = Business.instance();
+					business = business.instance();
 				}
 			}
 		} catch (Exception cnfe) {
