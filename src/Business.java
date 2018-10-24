@@ -191,6 +191,9 @@ public class Business implements Serializable {
 	 */
 	public String listCustomers() {
 		// for customers in the customer list, print out name, phone number, and ID
+		if(customerList.size() == 0) {
+			return "There are currently no customers in the customer list.";
+		}
 		String customers = "";
 		for (Customer customer : customerList) {
 			customers = customers + "Customer Name: " + customer.getName() + ", Phone Number: "
@@ -208,6 +211,9 @@ public class Business implements Serializable {
 	public String listWashers() {
 		// for washers in the washer list, print out the brand, model, price, and stock
 		String washerList = "";
+		if(modelList.size() == 0) {
+			return "There are currently no washers in the washer list.";
+		}
 		for (Washer washer : modelList) {
 			washerList = washerList + "Brand: " + washer.getBrand() + ", Model: " + washer.getModelName() + ", Price: $"
 					+ washer.getPrice() + ", Stock: " + washer.getStock() + "\n";

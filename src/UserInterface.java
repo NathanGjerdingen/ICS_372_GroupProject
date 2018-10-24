@@ -211,7 +211,7 @@ public class UserInterface {
 	public void addToInventory() {
 		String brand = getToken("Enter washer brand name");
 		String modelName = getToken("Enter model of washer");
-		int quantity = getNumber("Enter nubmer of washers");
+		int quantity = getNumber("Enter number of washers");
 		String result;
 		result = Business.addToInventory(brand, modelName, quantity);
 		System.out.println(result);
@@ -226,7 +226,7 @@ public class UserInterface {
 	public void purchase() {
 		String brand = getToken("Enter washer brand name");
 		String modelName = getToken("Enter model of washer");
-		int quantity = getNumber("Enter nubmer of washers");
+		int quantity = getNumber("Enter number of washers");
 		int customerID = getNumber("Enter customer ID");
 		Business.purchase(brand, modelName, quantity, customerID);
 	}
