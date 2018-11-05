@@ -1,4 +1,6 @@
+import java.awt.List;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Class to represent the Customers. Attributes: custPHoneNumber, name,
@@ -12,6 +14,8 @@ public class Customer implements Serializable {
 	private String custPhoneNumber;
 	private String name;
 	private int customerID;
+	//TODO: Implement repairPlan List
+	private List repairPlans = new List();
 
 	/**
 	 * Creates a customer object with the customer information.
@@ -105,6 +109,11 @@ public class Customer implements Serializable {
 			return true;
 		}
 		return false;
+	}
+
+	public void addRepairPlan(String brand, String modelName) {
+		// TODO addRepairPlan
+		
 	}
 
 }
