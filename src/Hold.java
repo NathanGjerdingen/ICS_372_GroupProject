@@ -7,8 +7,11 @@ import java.io.Serializable;
  */
 public class Hold implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Customer customer;
-	private Washer washer;
 	private int quantityRequested;
 
 	/**
@@ -18,9 +21,8 @@ public class Hold implements Serializable {
 	 * @param washer
 	 * @param quantityRequested
 	 */
-	public Hold(Customer customer, Washer washer, int quantityRequested) {
+	public Hold(Customer customer, int quantityRequested) {
 		this.customer = customer;
-		this.washer = washer;
 		this.setQuantityRequested(quantityRequested);
 	}
 
@@ -40,24 +42,6 @@ public class Hold implements Serializable {
 	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
-	}
-
-	/**
-	 * Gets the washer
-	 * 
-	 * @return
-	 */
-	public Washer getWasher() {
-		return washer;
-	}
-
-	/**
-	 * Sets the washer
-	 * 
-	 * @param washer
-	 */
-	public void setWasher(Washer washer) {
-		this.washer = washer;
 	}
 
 	/**

@@ -15,11 +15,21 @@ import java.util.List;
  */
 public class Business implements Serializable {
 
+	/**
+	 * Default searilVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Customer> customerList = new ArrayList<Customer>();
 	private List<Washer> modelList = new ArrayList<Washer>();
 	private static Business business;
 	private int customerID = 0001;
 	private double totalSales = 0;
+	
+	public static final int WASHER = 1;
+	public static final int DRYER = 2;
+	public static final int REFRIDGERATOR = 3;
+	public static final int FURNACE = 4;
+	public static final int STOVE = 5;
 
 	private Business() {
 	}
@@ -110,7 +120,7 @@ public class Business implements Serializable {
 		for (Washer washer : modelList) {
 			if (washer.equals(targetWasher)) {
 				washer.setStock(quantity + washer.getStock());
-				for (Hold hold : washer.holdQueueForWasher) {
+				for (Hold hold : washer.getHoldQueue()) {
 					// TODO: Implement hold list and class fully
 					if (washer.getStock() > 0) {
 						// While the stock of the washer is greater than zero and the hold quantity
@@ -125,7 +135,7 @@ public class Business implements Serializable {
 						}
 						// If the hold is satisfied remove it from the hold list
 						if (hold.getQuantityRequested() == 0) {
-							washer.holdQueueForWasher.remove(hold);
+							washer.getHoldQueue().remove(hold);
 						}
 					}
 				}
@@ -176,7 +186,7 @@ public class Business implements Serializable {
 							washer.setStock(0);
 							// Create a hold storing the customer that requested it and the washer requested
 							// with the quantity that they want after fulfilling what you can
-							washer.holdQueueForWasher.add(new Hold(customer, washer, quantity));
+							washer.getHoldQueue().add(new Hold(customer, quantity));
 						}
 					}
 				}
@@ -215,7 +225,7 @@ public class Business implements Serializable {
 			return "There are currently no washers in the washer list.";
 		}
 		for (Washer washer : modelList) {
-			washerList = washerList + "Brand: " + washer.getBrand() + ", Model: " + washer.getModelName() + ", Price: $"
+			washerList = washerList + "Brand: " + washer.getBrand() + ", Model: " + washer.getModel() + ", Price: $"
 					+ washer.getPrice() + ", Stock: " + washer.getStock() + "\n";
 		}
 		// Return the list of washers
