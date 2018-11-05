@@ -237,7 +237,7 @@ public class Business implements Serializable {
 	 * 
 	 * @return Washer List
 	 */
-	public String listWashers() {
+	public String listAppliances() {
 		// for washers in the washer list, print out the brand, model, price, and stock
 		String itemListString = "";
 		if (itemList.size() == 0) {
@@ -278,7 +278,7 @@ public class Business implements Serializable {
 		
 	}
 	
-	public boolean chargeRepairPlans() {
+	public boolean billRepairPlans() {
 	
 		for(Customer customer: customerList) {
 			//TODO: Implement once we discuss how to
