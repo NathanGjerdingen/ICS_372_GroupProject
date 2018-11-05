@@ -261,14 +261,47 @@ public class Business implements Serializable {
 		return "The total sales is: $" + totalSales;
 	}
 
-	public boolean enrollInRepairPlan(String brand, String modelName, int customerID) {
+	public String enrollInRepairPlan(String brand, String modelName, int customerID) {
 		for(Customer customer: customerList) {
 			if (customer.getCustomerID() == customerID) {
 				RepairPlan newRepairPlan = new RepairPlan(brand, modelName);
 				customer.addRepairPlan(brand,modelName);
+				//TODO: Implement once we discuss how to
 			}
 		}
+		return "No repair plan was enrolled as the Brand, ModelName, or customer ID is invalid";
+	}
+	
+	public String withdrawFromRepairPlan(String brand, String modelName, int customerID) {
+		//TODO: Implement once we discuss how to
+		return "This repair plan does not exist for this customer ID: " + customerID;
+		
+	}
+	
+	public boolean chargeRepairPlans() {
+	
+		for(Customer customer: customerList) {
+			//TODO: Implement once we discuss how to
+			return true;
+		}
 		return false;
+	}
+	
+	public String listAllUsersInRepairPlan() {
+		for(Customer customer: customerList) {
+			//Implement visitor pattern I think
+			//if the user is in a repair plan access them for brand and model + name, phone, ID, and account balances
+		}
+		return "";
+	}
+	
+	public String listAllBackorders(){
+		for(GenericItem item: itemList) {
+			if(item.getObjectID() != FURNACE) {
+				
+			}
+		}
+		return "";
 	}
 	/**
 	 * saves the current business object to disk at the source folder under the name
