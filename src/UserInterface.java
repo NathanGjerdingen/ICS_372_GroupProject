@@ -15,14 +15,19 @@ public class UserInterface {
 	private static Business business;
 	private static final int EXIT = 0;
 	private static final int ADD_CUSTOMER = 1;
-	private static final int ADD_WASHER = 2;
+	private static final int ADD_APPLIANCE = 2;
 	private static final int ADD_TO_INVENTORY = 3;
 	private static final int PURCHASE = 4;
 	private static final int LIST_CUSTOMERS = 5;
-	private static final int LIST_WASHERS = 6;
+	private static final int LIST_APPLIANCES = 6;
 	private static final int DISPLAY_TOTAL = 7;
-	private static final int SAVE = 8;
-	private static final int HELP = 9;
+	private static final int ENROLL_REPAIR = 8;
+	private static final int WITHDRAW_REPAIR = 9;
+	private static final int BILL_REPAIR = 10;
+	private static final int LIST_REPAIR = 11;
+	private static final int LIST_BACKORDER = 12;
+	private static final int SAVE = 13;
+	private static final int HELP = 14;
 
 	/**
 	 * Made private for singleton pattern. Conditionally looks for any saved data.
@@ -170,12 +175,17 @@ public class UserInterface {
 		System.out.println("Enter a number between 0 and 12 as explained below:");
 		System.out.println(EXIT + " to Exit\n");
 		System.out.println(ADD_CUSTOMER + " to add a customer");
-		System.out.println(ADD_WASHER + " to add washer");
+		System.out.println(ADD_APPLIANCE + " to add an appliance");
 		System.out.println(ADD_TO_INVENTORY + " to add washers to the inventory");
 		System.out.println(PURCHASE + " to purchase a washer ");
 		System.out.println(LIST_CUSTOMERS + " to view a list of customers ");
-		System.out.println(LIST_WASHERS + " to view a list of washers");
+		System.out.println(LIST_APPLIANCES + " to view a list of washers");
 		System.out.println(DISPLAY_TOTAL + " to view a total of all sales");
+		System.out.println(ENROLL_REPAIR + " to enroll in a repair plan");
+		System.out.println(WITHDRAW_REPAIR + " to withdraw from a repair plan");
+		System.out.println(BILL_REPAIR + " to bill repair plans");
+		System.out.println(LIST_REPAIR + "to list all users in a repair plan");
+		System.out.println(LIST_BACKORDER + " to list all backorders");
 		System.out.println(SAVE + " to  save data");
 		System.out.println(HELP + " for help");
 	}
@@ -242,7 +252,7 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for viewing list of customers. uses the appropriate
-	 * Business method to view customers
+	 * Business method to view customers.
 	 * 
 	 * @return list of customers
 	 */
@@ -254,7 +264,7 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for viewing list of washers. uses the appropriate
-	 * Business method to view washers
+	 * Business method to view washers.
 	 * 
 	 * @return list of washers
 	 */
@@ -266,13 +276,64 @@ public class UserInterface {
 
 	/**
 	 * Method to be called for displaying the total sales. uses the appropriate
-	 * Business method to display total sales
+	 * Business method to display total sales.
 	 * 
 	 * @return total sales
 	 */
 	public void displayTotal() {
 		String result;
 		result = business.displayTotalSales();
+		System.out.println(result);
+	}
+
+	/**
+	 * Method to be called for enrolling in a repair plan. uses the appropriate
+	 * Business method to enroll in a repair plan.
+	 */
+
+	public void enrollRepairPlan() {
+		int customerID = getNumber("Enter customer ID");
+		String brand = getToken("Enter appliance brand name");
+		String modelName = getToken("Enter appliance model");
+	}
+
+	/**
+	 * Method to be called for withdrawing from a repair plan. uses the appropriate
+	 * Business method to withdraw from a repair plan.
+	 */
+
+	public void withdrawRepairPlan() {
+		int customerID = getNumber("Enter customer ID");
+		String brand = getToken("Enter appliance brand name");
+		String modelName = getToken("Enter appliance model");
+	}
+
+	/**
+	 * Method to be called for billing all active repair plans. uses the appropriate
+	 * Business method to bill all repair plans.
+	 */
+
+	public void billRepairPlan() {
+
+	}
+
+	/**
+	 * Method to be called to list all users enrolled in a repair plan. uses the
+	 * appropriate Business method to list users in a repair plan.
+	 */
+
+	public void listRepairPlan() {
+		String result;
+		System.out.println(result);
+	}
+
+	/**
+	 * Method to be called to list all current backorders. uses the appropriate
+	 * Business method for displaying all backorders.
+	 */
+
+	public void listBackorders() {
+		String result;
 		System.out.println(result);
 	}
 
@@ -325,7 +386,7 @@ public class UserInterface {
 			case ADD_CUSTOMER:
 				addCustomer();
 				break;
-			case ADD_WASHER:
+			case ADD_APPLIANCE:
 				addWasher();
 				break;
 			case ADD_TO_INVENTORY:
@@ -337,11 +398,26 @@ public class UserInterface {
 			case LIST_CUSTOMERS:
 				listCustomers();
 				break;
-			case LIST_WASHERS:
+			case LIST_APPLIANCES:
 				listWashers();
 				break;
 			case DISPLAY_TOTAL:
 				displayTotal();
+				break;
+			case ENROLL_REPAIR:
+				enrollRepairPlan();
+				break;
+			case WITHDRAW_REPAIR:
+				withdrawRepairPlan();
+				break;
+			case BILL_REPAIR:
+				billRepairPlan();
+				break;
+			case LIST_REPAIR:
+				listRepairPlan();
+				break;
+			case LIST_BACKORDER:
+				listBackorders();
 				break;
 			case SAVE:
 				save();
