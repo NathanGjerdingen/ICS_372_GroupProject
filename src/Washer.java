@@ -13,6 +13,8 @@ import java.util.Queue;
 @SuppressWarnings("serial")
 public class Washer extends GenericItem implements Serializable {
 
+	private final int OBJECT_ID = 1;
+	
 	/**
 	 * Washer takes in a brand, modelName, price when instantiated. Stock is set to
 	 * 1 immediately, because when introducing a new washer to the system you will
@@ -37,4 +39,9 @@ public class Washer extends GenericItem implements Serializable {
 		super(brand, model, 0);
 	}
 
+	@Override
+	public String toString() {
+		return "Washer " + super.toString();
+	}
+	
 }

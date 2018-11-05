@@ -2,6 +2,8 @@
 @SuppressWarnings("serial")
 public class Dryer extends GenericItem {
 
+	private final int OBJECT_ID = 2;
+	
 	/**
 	 * @param brand
 	 * @param model
@@ -12,5 +14,9 @@ public class Dryer extends GenericItem {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "Dryer " + super.toString();
+	}
 
 }

@@ -1,10 +1,8 @@
 
+@SuppressWarnings("serial")
 public class Stove extends GenericItem {
-
-	/**
-	 * 	Inherited searialVersionUID
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private final int OBJECT_ID = 5;
 
 	/**
 	 * @param brand
@@ -15,4 +13,9 @@ public class Stove extends GenericItem {
 		super(brand, model, price);
 	}
 
+	@Override
+	public String toString() {
+		return "Stove " + super.toString();
+	}
+	
 }

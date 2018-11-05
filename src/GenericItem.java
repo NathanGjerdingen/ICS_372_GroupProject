@@ -5,8 +5,10 @@ import java.util.Queue;
 
 public abstract class GenericItem implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private final int OBJECT_ID = 0;
 	private String model;
 	private String brand;
+	private int capacity;
 	private double price;
 	private int stock;
 	private Queue<Hold> holdQueue = new LinkedList<Hold>();
@@ -16,11 +18,24 @@ public abstract class GenericItem implements Serializable {
 		this.price = price;
 		this.brand = brand;
 		this.model = model;
+		this.capacity = 0;
+		this.stock = 1;
+	}
+	
+	public GenericItem(String brand, String model, double price, int capacity) {
+		this.price = price;
+		this.brand = brand;
+		this.model = model;
+		this.capacity = capacity;
 		this.stock = 1;
 	}
 	
 	public Queue<Hold> getHoldQueue() {
 		return holdQueue;
+	}
+	
+	public int getObjectID() {
+		return OBJECT_ID;
 	}
 
 	public String getModel() {
@@ -37,6 +52,10 @@ public abstract class GenericItem implements Serializable {
 	
 	public int getStock() {
 		return stock;
+	}
+	
+	public int getCapacity() {
+		return capacity;
 	}
 	
 	public void setStock(int stock) {
@@ -80,7 +99,11 @@ public abstract class GenericItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "GenericItem [model=" + model + ", price=" + price + "]";
+		if (getCapacity() == 0) {
+			return "GenericItem [brand= " + brand + ",model=" + model + ", price= " + price + "]";
+		} else {
+			return "GenericItem [brand= " + brand + ",model=" + model + ", capacity= " + capacity + ", price= " + price + "]";
+		}
 	}
 	
 	public boolean equals(GenericItem g) {
