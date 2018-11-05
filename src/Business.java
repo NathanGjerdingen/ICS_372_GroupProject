@@ -20,28 +20,28 @@ public class Business implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Customer> customerList = new ArrayList<Customer>();
-	
+
 	/*
-	 * 	FUTURE ISSUE:
-	 * 		Eventually, we'll need to change the Washer list to an 
-	 * 		ItemList. When iterating over this list for items, we'll
-	 * 		need a way to diserce a "Washer" from a "Dryer" from a
-	 * 		"Furnace" and ect. 
+	 * FUTURE ISSUE: Eventually, we'll need to change the Washer list to an
+	 * ItemList. When iterating over this list for items, we'll need a way to
+	 * diserce a "Washer" from a "Dryer" from a "Furnace" and ect.
 	 */
-	private List<Washer> modelList = new ArrayList<Washer>();
-	
-	
+	private List<GenericItem> itemList = new ArrayList<GenericItem>();
+
 	private static Business business;
 	private int customerID = 0001;
 	private double totalSales = 0;
-	
+	private double repairPlanTotalSales = 0;
+
 	public static final int WASHER = 1;
 	public static final int DRYER = 2;
 	public static final int REFRIDGERATOR = 3;
 	public static final int FURNACE = 4;
 	public static final int STOVE = 5;
+	GenericItemFactory factory = GenericItemFactory.instance();
 
 	private Business() {
+
 	}
 
 	/**
@@ -98,18 +98,18 @@ public class Business implements Serializable {
 	 * @param price
 	 * @return String if it was successful or not
 	 */
-	public String addAModel(String brand, String modelName, double price) {
+	public String addAModel(String brand, String modelName, double price, int type, double capacity, double BTU) {
 		// TODO: Implement add a model
 		// iterate through the list of washer objects in modelList and check if it is
 		// already present, if it is let the user know and print out the statement
-		Washer targetWasher = new Washer(brand, modelName, price);
-		for (Washer washer : modelList) {
-			if (washer.equals(targetWasher)) {
+		GenericItem newModel = factory.createGenericItem(type, brand, modelName, price, capacity, BTU);
+		for (GenericItem item : itemList) {
+			if (item.equals(newModel)) {
 				// fail
 				return "The Brand: " + brand + ", Model: " + modelName + " is already in the catalogue of washers.";
 			}
 		}
-		modelList.add(targetWasher);
+		itemList.add(newModel);
 		// Success
 		return "The Brand: " + brand + ", Model: " + modelName + " has been added to the list of washers.";
 
@@ -125,28 +125,33 @@ public class Business implements Serializable {
 	 * @param quantity
 	 * @return String if it was successful or not
 	 */
-	public String addToInventory(String brand, String modelName, int quantity) {
-		Washer targetWasher = new Washer(brand, modelName);
-		for (Washer washer : modelList) {
-			if (washer.equals(targetWasher)) {
-				washer.setStock(quantity + washer.getStock());
-				for (Hold hold : washer.getHoldQueue()) {
-					// TODO: Implement hold list and class fully
-					if (washer.getStock() > 0) {
-						// While the stock of the washer is greater than zero and the hold quantity
-						// requested is above zero
-						while (washer.getStock() > 0 && hold.getQuantityRequested() > 0) {
-							// Total sales = total sales + the washer price
-							totalSales = totalSales + washer.getPrice();
-							// set the stock of the washer -1 to indicate we have sold it
-							washer.setStock(washer.getStock() - 1);
-							// fulfill the hold by decreasing the quantity requested
-							hold.setQuantityRequested(hold.getQuantityRequested() - 1);
+	public String addToInventory(String brand, String modelName, int quantity, int type, double capacity, double BTU) {
+		// TODO: figure out if leaving 0 for price works
+		GenericItem newModel = factory.createGenericItem(type, brand, modelName, 0, capacity, BTU);
+		for (GenericItem item : itemList) {
+			if (item.equals(newModel)) {
+				item.setStock(quantity + item.getStock());
+				if (type != FURNACE) {
+					for (Hold hold : item.getHoldQueue()) {
+						// TODO: Implement hold list and class fully
+						if (item.getStock() > 0) {
+							// While the stock of the washer is greater than zero and the hold quantity
+							// requested is above zero
+							while (item.getStock() > 0 && hold.getQuantityRequested() > 0) {
+								// Total sales = total sales + the washer price
+								totalSales = totalSales + item.getPrice();
+								// set the stock of the washer -1 to indicate we have sold it
+								item.setStock(item.getStock() - 1);
+								// fulfill the hold by decreasing the quantity requested
+								hold.setQuantityRequested(hold.getQuantityRequested() - 1);
+							}
+							// If the hold is satisfied remove it from the hold list
+							if (hold.getQuantityRequested() == 0) {
+								item.getHoldQueue().remove(hold);
+							}
 						}
-						// If the hold is satisfied remove it from the hold list
-						if (hold.getQuantityRequested() == 0) {
-							washer.getHoldQueue().remove(hold);
-						}
+						// if holds were processed
+						return "The inventory was added and holds have been fulfilled.";
 					}
 				}
 				// Success
@@ -171,32 +176,36 @@ public class Business implements Serializable {
 	 * @param quantity
 	 * @param customerID
 	 */
-	public void purchase(String brand, String modelName, int quantity, int customerID) {
+	public void purchase(String brand, String modelName, int quantity, int customerID, int type, double capacity,
+			double BTU) {
 		// TODO: Implement purchase
 		// check that the customer is inside the customer list via ID
-		Washer targetWasher = new Washer(brand, modelName);
+		GenericItem targetModel = factory.createGenericItem(type, brand, modelName, 0, capacity, BTU);
 		for (Customer customer : customerList) {
 			if (customer.getCustomerID() == customerID) {
 				// Check that the brand and model is in the modelList
-				for (Washer washer : modelList) {
-					if (washer.equals(targetWasher)) {
+				for (GenericItem item : itemList) {
+					if (item.equals(targetModel)) {
 						// If the washer Stock is greater than or equal to the quantity requested
-						if (washer.getStock() >= quantity) {
+						if (item.getStock() >= quantity) {
 							// set the washer stock to washer stock - quantity requested,
 							// then set total sales to totalSales + the washers price and quantity requested
-							washer.setStock(washer.getStock() - quantity);
-							totalSales = totalSales + (washer.getPrice() * quantity);
+							item.setStock(item.getStock() - quantity);
+							totalSales = totalSales + (item.getPrice() * quantity);
 						} else {
 							// else if the stock is less than the quantity requested.
 							// Quantity is equal to quantity requested minus the stock available to be
 							// fulfilled
-							quantity = quantity - washer.getStock();
-							totalSales = totalSales + (washer.getPrice() * washer.getStock());
+							quantity = quantity - item.getStock();
+							totalSales = totalSales + (item.getPrice() * item.getStock());
 							// set the washer stock to zero to indicate the quantity removed
-							washer.setStock(0);
+							item.setStock(0);
 							// Create a hold storing the customer that requested it and the washer requested
-							// with the quantity that they want after fulfilling what you can
-							washer.getHoldQueue().add(new Hold(customer, quantity));
+							// with the quantity that they want after fulfilling what you can.
+							// If the item is a furnace the hold is not created
+							if (type != FURNACE) {
+								item.getHoldQueue().add(new Hold(customer, quantity));
+							}
 						}
 					}
 				}
@@ -211,7 +220,7 @@ public class Business implements Serializable {
 	 */
 	public String listCustomers() {
 		// for customers in the customer list, print out name, phone number, and ID
-		if(customerList.size() == 0) {
+		if (customerList.size() == 0) {
 			return "There are currently no customers in the customer list.";
 		}
 		String customers = "";
@@ -230,16 +239,16 @@ public class Business implements Serializable {
 	 */
 	public String listWashers() {
 		// for washers in the washer list, print out the brand, model, price, and stock
-		String washerList = "";
-		if(modelList.size() == 0) {
+		String itemListString = "";
+		if (itemList.size() == 0) {
 			return "There are currently no washers in the washer list.";
 		}
-		for (Washer washer : modelList) {
-			washerList = washerList + "Brand: " + washer.getBrand() + ", Model: " + washer.getModel() + ", Price: $"
-					+ washer.getPrice() + ", Stock: " + washer.getStock() + "\n";
+		for (GenericItem item : itemList) {
+			itemListString = itemListString + "Brand: " + item.getBrand() + ", Model: " + item.getModel() + ", Price: $"
+					+ item.getPrice() + ", Stock: " + item.getStock() + "\n";
 		}
 		// Return the list of washers
-		return washerList;
+		return itemListString;
 	}
 
 	/**
@@ -252,6 +261,15 @@ public class Business implements Serializable {
 		return "The total sales is: $" + totalSales;
 	}
 
+	public boolean enrollInRepairPlan(String brand, String modelName, int customerID) {
+		for(Customer customer: customerList) {
+			if (customer.getCustomerID() == customerID) {
+				RepairPlan newRepairPlan = new RepairPlan(brand, modelName);
+				customer.addRepairPlan(brand,modelName);
+			}
+		}
+		return false;
+	}
 	/**
 	 * saves the current business object to disk at the source folder under the name
 	 * BusinessData

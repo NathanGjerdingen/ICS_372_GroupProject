@@ -13,7 +13,7 @@ public class GenericItemFactory {
 		return factory;
 	}
 
-	public GenericItem createGenericItem(int type, String brand, String model, double price, int capacity) {
+	public GenericItem createGenericItem(int type, String brand, String model, double price, double capacity, double BTU) {
 		switch (type) {
 		case Business.WASHER:
 			return new Washer(brand, model, price);
@@ -22,7 +22,7 @@ public class GenericItemFactory {
 		case Business.REFRIDGERATOR:
 			return new Refridgerator(brand, model, price, capacity);
 		case Business.FURNACE:
-			return new Furnace(brand, model, price);
+			return new Furnace(brand, model, price, BTU);
 		case Business.STOVE:
 			return new Stove(brand, model, price);
 		default:
