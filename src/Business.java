@@ -258,7 +258,7 @@ public class Business implements Serializable {
 	 */
 	public String displayTotalSales() {
 		// Displays the total sales
-		return "The total sales is: $" + totalSales;
+		return "The total sales is: $" + totalSales + "/n The total repair plan profit is: " + repairPlanTotalSales;
 	}
 
 	public String enrollInRepairPlan(String brand, String modelName, int customerID) {
@@ -296,12 +296,18 @@ public class Business implements Serializable {
 	}
 	
 	public String listAllBackorders(){
+		String holdListString = "";
 		for(GenericItem item: itemList) {
 			if(item.getObjectID() != FURNACE) {
-				
+				for(Hold hold: item.getHoldQueue()) {
+					//TODO: implement hold toString
+					holdListString = hold.toString() + "/n";
+				}
 			}
+			//if there are holds
+			return holdListString;
 		}
-		return "";
+		return "There are no current holds";
 	}
 	/**
 	 * saves the current business object to disk at the source folder under the name
