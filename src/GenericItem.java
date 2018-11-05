@@ -100,9 +100,9 @@ public abstract class GenericItem implements Serializable {
 	@Override
 	public String toString() {
 		if (getCapacity() == 0) {
-			return "GenericItem [brand= " + brand + ",model=" + model + ", price= " + price + "]";
+			return "[brand= " + brand + ",model=" + model + ", price= " + price + "]";
 		} else {
-			return "GenericItem [brand= " + brand + ",model=" + model + ", capacity= " + capacity + ", price= " + price + "]";
+			return "[brand= " + brand + ",model=" + model + ", capacity= " + capacity + ", price= " + price + "]";
 		}
 	}
 	
