@@ -1,6 +1,6 @@
-import java.awt.List;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to represent the Customers. Attributes: custPHoneNumber, name,
@@ -14,8 +14,8 @@ public class Customer implements Serializable {
 	private String custPhoneNumber;
 	private String name;
 	private int customerID;
-	//TODO: Implement repairPlan List
-	private List repairPlans = new List();
+	private double customerApplianceBalance = 0;
+	private double customerRepairPlanBalance = 0;
 
 	/**
 	 * Creates a customer object with the customer information.
@@ -97,6 +97,23 @@ public class Customer implements Serializable {
 		this.customerID = customerID;
 	}
 
+	
+	public double getCustomerApplianceBalance() {
+		return customerApplianceBalance;
+	}
+
+	public void setCustomerApplianceBalance(double customerApplianceBalance) {
+		this.customerApplianceBalance = customerApplianceBalance;
+	}
+
+	public double getCustomerRepairPlanBalance() {
+		return customerRepairPlanBalance;
+	}
+
+	public void setCustomerRepairPlanBalance(double customerRepairPlanBalance) {
+		this.customerRepairPlanBalance = customerRepairPlanBalance;
+	}
+
 	/**
 	 * Method to determine if Customers are the "same". this method looks at name
 	 * and phoneNumber to determine "sameness".
@@ -111,9 +128,6 @@ public class Customer implements Serializable {
 		return false;
 	}
 
-	public void addRepairPlan(String brand, String modelName) {
-		// TODO addRepairPlan
-		
-	}
+	
 
 }

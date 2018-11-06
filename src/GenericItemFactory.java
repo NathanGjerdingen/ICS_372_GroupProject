@@ -13,12 +13,12 @@ public class GenericItemFactory {
 		return factory;
 	}
 
-	public GenericItem createGenericItem(int type, String brand, String model, double price, double capacity, double BTU) {
+	public GenericItem createGenericItem(int type, String brand, String model, double price, double capacity, double BTU, double repairPlanCost) {
 		switch (type) {
 		case Business.WASHER:
-			return new Washer(brand, model, price);
+			return new Washer(brand, model, price, repairPlanCost);
 		case Business.DRYER:
-			return new Dryer(brand, model, price);
+			return new Dryer(brand, model, price, repairPlanCost);
 		case Business.REFRIDGERATOR:
 			return new Refridgerator(brand, model, price, capacity);
 		case Business.FURNACE:

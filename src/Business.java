@@ -27,6 +27,7 @@ public class Business implements Serializable {
 	 * diserce a "Washer" from a "Dryer" from a "Furnace" and ect.
 	 */
 	private List<GenericItem> itemList = new ArrayList<GenericItem>();
+	private List<RepairPlan> repairPlanList = new ArrayList<RepairPlan>();
 
 	private static Business business;
 	private int customerID = 0001;
@@ -98,11 +99,12 @@ public class Business implements Serializable {
 	 * @param price
 	 * @return String if it was successful or not
 	 */
-	public String addAModel(String brand, String modelName, double price, int type, double capacity, double BTU) {
+	public String addAModel(String brand, String modelName, double price, int type, double capacity, double BTU,
+			double repairPlanCost) {
 		// TODO: Implement add a model
 		// iterate through the list of washer objects in modelList and check if it is
 		// already present, if it is let the user know and print out the statement
-		GenericItem newModel = factory.createGenericItem(type, brand, modelName, price, capacity, BTU);
+		GenericItem newModel = factory.createGenericItem(type, brand, modelName, price, capacity, BTU, repairPlanCost);
 		for (GenericItem item : itemList) {
 			if (item.equals(newModel)) {
 				// fail
@@ -125,9 +127,9 @@ public class Business implements Serializable {
 	 * @param quantity
 	 * @return String if it was successful or not
 	 */
-	public String addToInventory(String brand, String modelName, int quantity, int type, double capacity, double BTU) {
+	public String addToInventory(String brand, String modelName, int quantity, int type, double capacity, double BTU, double repairPlanCost) {
 		// TODO: figure out if leaving 0 for price works
-		GenericItem newModel = factory.createGenericItem(type, brand, modelName, 0, capacity, BTU);
+		GenericItem newModel = factory.createGenericItem(type, brand, modelName, 0, capacity, BTU, repairPlanCost);
 		for (GenericItem item : itemList) {
 			if (item.equals(newModel)) {
 				item.setStock(quantity + item.getStock());
@@ -180,7 +182,7 @@ public class Business implements Serializable {
 			double BTU) {
 		// TODO: Implement purchase
 		// check that the customer is inside the customer list via ID
-		GenericItem targetModel = factory.createGenericItem(type, brand, modelName, 0, capacity, BTU);
+		GenericItem targetModel = factory.createGenericItem(type, brand, modelName, 0, capacity, BTU, 0);
 		for (Customer customer : customerList) {
 			if (customer.getCustomerID() == customerID) {
 				// Check that the brand and model is in the modelList
@@ -262,53 +264,97 @@ public class Business implements Serializable {
 	}
 
 	public String enrollInRepairPlan(String brand, String modelName, int customerID) {
-		for(Customer customer: customerList) {
+		for (Customer customer : customerList) {
 			if (customer.getCustomerID() == customerID) {
-				RepairPlan newRepairPlan = new RepairPlan(brand, modelName);
-				customer.addRepairPlan(brand,modelName);
-				//TODO: Implement once we discuss how to
+				for (GenericItem item : itemList) {
+					// If the item brand and model matchers a washer or dryer
+					if (item.getBrand().equals(brand) && item.getModel().equals(modelName)
+							&& item.getObjectID() == WASHER || item.getObjectID() == DRYER) {
+						// make a new plan and put it in the list
+						RepairPlan newPlan = new RepairPlan(customer, item);
+						repairPlanList.add(newPlan);
+						return "The repair plan has been added for customer: " + customerID + " on brand: " + brand
+								+ " and model: " + modelName;
+					}
+				}
 			}
 		}
 		return "No repair plan was enrolled as the Brand, ModelName, or customer ID is invalid";
 	}
-	
+
 	public String withdrawFromRepairPlan(String brand, String modelName, int customerID) {
-		//TODO: Implement once we discuss how to
+		for (RepairPlan repairPlan : repairPlanList) {
+
+			GenericItem planItem = repairPlan.getItem();
+			Customer planCustomer = repairPlan.getCustomer();
+
+			if (planCustomer.getCustomerID() == customerID && planItem.getBrand().equals(brand)
+					&& planItem.getModel().equals(modelName)) {
+				repairPlanList.remove(repairPlan);
+				return "The repair plan has been removed";
+			}
+
+		}
 		return "This repair plan does not exist for this customer ID: " + customerID;
-		
+
 	}
-	
+
 	public boolean billRepairPlans() {
-	
-		for(Customer customer: customerList) {
-			//TODO: Implement once we discuss how to
-			return true;
+
+		for (RepairPlan repairPlan : repairPlanList) {
+			GenericItem planItem = repairPlan.getItem();
+			Customer planCustomer = repairPlan.getCustomer();
+
+			if (planItem.getObjectID() == WASHER) {
+				Washer item = (Washer) planItem;
+				double newTotal = item.getRepairPlanCost() + planCustomer.getCustomerRepairPlanBalance();
+				planCustomer.setCustomerRepairPlanBalance(newTotal);
+				return true;
+			} else {
+				Dryer item = (Dryer) planItem;
+				double newTotal = item.getRepairPlanCost() + planCustomer.getCustomerRepairPlanBalance();
+				planCustomer.setCustomerRepairPlanBalance(newTotal);
+				return true;
+			}
+
 		}
 		return false;
 	}
-	
+
 	public String listAllUsersInRepairPlan() {
-		for(Customer customer: customerList) {
-			//Implement visitor pattern I think
-			//if the user is in a repair plan access them for brand and model + name, phone, ID, and account balances
+		if(repairPlanList.isEmpty()) {
+			return "There are no repair plans currently";
 		}
-		return "";
+
+		String listString ="";
+		for (RepairPlan repairPlan : repairPlanList) {
+
+			GenericItem planItem = repairPlan.getItem();
+			Customer planCustomer = repairPlan.getCustomer();
+			listString = "Name: " + planCustomer.getName() + " Phone number " + planCustomer.getGetPhoneNumber()
+					+ " ID: " + planCustomer.getCustomerID() + " Appliance balance: "
+					+ planCustomer.getCustomerApplianceBalance() + "Repair plan balance "
+					+ planCustomer.getCustomerRepairPlanBalance() + " Item brand: " + planItem.getBrand()
+					+ " Item model: " + planItem.getModel();
+		}
+		return listString;
 	}
-	
-	public String listAllBackorders(){
+
+	public String listAllBackorders() {
 		String holdListString = "";
-		for(GenericItem item: itemList) {
-			if(item.getObjectID() != FURNACE) {
-				for(Hold hold: item.getHoldQueue()) {
-					//TODO: implement hold toString
+		for (GenericItem item : itemList) {
+			if (item.getObjectID() != FURNACE) {
+				for (Hold hold : item.getHoldQueue()) {
+					// TODO: implement hold toString
 					holdListString = hold.toString() + "/n";
 				}
 			}
-			//if there are holds
+			// if there are holds
 			return holdListString;
 		}
 		return "There are no current holds";
 	}
+
 	/**
 	 * saves the current business object to disk at the source folder under the name
 	 * BusinessData

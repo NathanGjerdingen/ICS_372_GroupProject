@@ -1,11 +1,23 @@
 
 public class RepairPlan {
 
-	private String brand;
-	private String model;
-	public RepairPlan(String brand, String model) {
-		this.brand = brand;
-		this.model = model;
+	private Customer customer;
+	private GenericItem item;
+	public RepairPlan(Customer customer, GenericItem item) {
+		this.setCustomer(customer);
+		this.setItem(item);
 	}
-	//TODO: Implement equals method
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public GenericItem getItem() {
+		return item;
+	}
+	public void setItem(GenericItem item) {
+		this.item = item;
+	}
+	
 }

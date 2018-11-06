@@ -14,6 +14,7 @@ import java.util.Queue;
 public class Washer extends GenericItem implements Serializable {
 
 	private final int OBJECT_ID = 1;
+	private double repairPlanCost;
 	
 	/**
 	 * Washer takes in a brand, modelName, price when instantiated. Stock is set to
@@ -24,8 +25,9 @@ public class Washer extends GenericItem implements Serializable {
 	 * @param model
 	 * @param price
 	 */
-	public Washer(String brand, String model, double price) {
+	public Washer(String brand, String model, double price, double repairPlanCost) {
 		super(brand, model, price);
+		this.setRepairPlanCost(repairPlanCost);
 	}
 
 	/**
@@ -39,9 +41,18 @@ public class Washer extends GenericItem implements Serializable {
 		super(brand, model, 0);
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Washer " + super.toString();
+	}
+
+	public double getRepairPlanCost() {
+		return repairPlanCost;
+	}
+
+	public void setRepairPlanCost(double repairPlanCost) {
+		this.repairPlanCost = repairPlanCost;
 	}
 	
 }

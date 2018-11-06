@@ -12,7 +12,6 @@ public abstract class GenericItem implements Serializable {
 	private double price;
 	private int stock;
 	private Queue<Hold> holdQueue = new LinkedList<Hold>();
-	private Queue<Customer> repairPlanQueue = new LinkedList<Customer>();
 
 	public GenericItem(String brand, String model, double price) {
 		this.price = price;
