@@ -2,7 +2,7 @@
 @SuppressWarnings("serial")
 public class Stove extends GenericItem {
 	
-	private final int OBJECT_ID = 5;
+	private final int OBJECT_ID = 4;
 
 	/**
 	 * @param brand

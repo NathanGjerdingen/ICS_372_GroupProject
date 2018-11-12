@@ -2,7 +2,7 @@
 @SuppressWarnings("serial")
 public class Furnace extends GenericItem {
 
-	private final int OBJECT_ID = 4;
+	private final int OBJECT_ID = 6;
 	private double britishThermalUnits;
 	private boolean repairPlan = false;
 	/**

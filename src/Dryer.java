@@ -2,7 +2,7 @@
 @SuppressWarnings("serial")
 public class Dryer extends GenericItem {
 
-	private final int OBJECT_ID = 2;
+	private final int OBJECT_ID = 3;
 	private double repairPlanCost;
 	
 	/**

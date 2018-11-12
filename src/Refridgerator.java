@@ -2,7 +2,7 @@
 @SuppressWarnings("serial")
 public class Refridgerator extends GenericItem{
 
-	private final int OBJECT_ID = 3;
+	private final int OBJECT_ID = 5;
 	private double capacity;
 	
 	/**

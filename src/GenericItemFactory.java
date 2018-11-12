@@ -17,6 +17,8 @@ public class GenericItemFactory {
 		switch (type) {
 		case Business.WASHER:
 			return new Washer(brand, model, price, repairPlanCost);
+		case Business.DISHWASHER:
+			return new Washer(brand, model, price, repairPlanCost);
 		case Business.DRYER:
 			return new Dryer(brand, model, price, repairPlanCost);
 		case Business.REFRIDGERATOR:
