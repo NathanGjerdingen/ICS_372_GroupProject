@@ -176,10 +176,10 @@ public class UserInterface {
 		System.out.println(EXIT + " to Exit\n");
 		System.out.println(ADD_CUSTOMER + " to add a customer");
 		System.out.println(ADD_APPLIANCE + " to add an appliance");
-		System.out.println(ADD_TO_INVENTORY + " to add washers to the inventory");
-		System.out.println(PURCHASE + " to purchase a washer ");
+		System.out.println(ADD_TO_INVENTORY + " to add appliacnes to the inventory");
+		System.out.println(PURCHASE + " to purchase an appliance ");
 		System.out.println(LIST_CUSTOMERS + " to view a list of customers ");
-		System.out.println(LIST_APPLIANCES + " to view a list of washers");
+		System.out.println(LIST_APPLIANCES + " to view a list of all appliances");
 		System.out.println(DISPLAY_TOTAL + " to view a total of all sales");
 		System.out.println(ENROLL_REPAIR + " to enroll in a repair plan");
 		System.out.println(WITHDRAW_REPAIR + " to withdraw from a repair plan");
@@ -188,6 +188,16 @@ public class UserInterface {
 		System.out.println(LIST_BACKORDER + " to list all backorders");
 		System.out.println(SAVE + " to  save data");
 		System.out.println(HELP + " for help");
+	}
+
+	public void applianceType() {
+		System.out.println("Enter a number to choose which appliance you would like to use");
+		System.out.println(1 + " Washer");
+		System.out.println(2 + " Dishwasher");
+		System.out.println(3 + " Dryer");
+		System.out.println(4 + " Range");
+		System.out.println(5 + " Refrigerator");
+		System.out.println(6 + " Furnace");
 	}
 
 	/**
@@ -211,13 +221,40 @@ public class UserInterface {
 	 * 
 	 * @return return string value that gives user confirmation
 	 */
-	public void addWasher() {
-		String brand = getToken("Enter washer brand name");
-		String modelName = getToken("Enter model of washer");
-		double price = getDouble("Enter price of washer");
+	public void addAppliance() {
 		String result;
-		result = business.addAModel(brand, modelName, price);
-		System.out.println(result);
+		applianceType();
+		int type = getCommand();
+		String brand = getToken("Enter appliance brand name");
+		String modelName = getToken("Enter model of appliance");
+		double price = getDouble("Enter price of appliance");
+		double capacity;
+		double BTU;
+		double repairPlanCost;
+
+		switch (type) {
+		case 1:
+		case 2:
+			repairPlanCost = getDouble("Enter cost of repair plan");
+			result = business.addAModel(brand, modelName, price, type, 0, 0, repairPlanCost);
+			System.out.println(result);
+			break;
+		case 3:
+		case 4:
+			result = business.addAModel(brand, modelName, price, type, 0, 0, 0);
+			System.out.println(result);
+			break;
+		case 5:
+			capacity = getDouble("Enter capacity of refigerator");
+			result = business.addAModel(brand, modelName, price, type, capacity, 0, 0);
+			System.out.println(result);
+			break;
+		case 6:
+			BTU = getDouble("Enter maximum heating output of range");
+			result = business.addAModel(brand, modelName, price, type, 0, BTU, 0);
+			System.out.println(result);
+			break;
+		}
 	}
 
 	/**
@@ -228,12 +265,39 @@ public class UserInterface {
 	 * @return string value that gives user confirmation
 	 */
 	public void addToInventory() {
-		String brand = getToken("Enter washer brand name");
-		String modelName = getToken("Enter model of washer");
-		int quantity = getNumber("Enter number of washers");
 		String result;
-		result = business.addToInventory(brand, modelName, quantity);
-		System.out.println(result);
+		applianceType();
+		int type = getCommand();
+		String brand = getToken("Enter appliance brand name");
+		String modelName = getToken("Enter model of appliance");
+		int quantity = getNumber("Enter number of appliacnes");
+		double capacity;
+		double BTU;
+		double repairPlanCost;
+
+		switch (type) {
+		case 1:
+		case 2:
+			repairPlanCost = getDouble("Enter cost of repair plan");
+			result = business.addToInventory(brand, modelName, quantity, type, 0, 0, repairPlanCost);
+			System.out.println(result);
+			break;
+		case 3:
+		case 4:
+			result = business.addToInventory(brand, modelName, quantity, type, 0, 0, 0);
+			System.out.println(result);
+			break;
+		case 5:
+			capacity = getDouble("Enter capacity of refigerator");
+			result = business.addToInventory(brand, modelName, quantity, type, capacity, 0, 0);
+			System.out.println(result);
+			break;
+		case 6:
+			BTU = getDouble("Enter maximum heating output of range");
+			result = business.addToInventory(brand, modelName, quantity, type, 0, BTU, 0);
+			System.out.println(result);
+			break;
+		}
 	}
 
 	/**
@@ -243,11 +307,35 @@ public class UserInterface {
 	 * 
 	 */
 	public void purchase() {
-		String brand = getToken("Enter washer brand name");
-		String modelName = getToken("Enter model of washer");
+		applianceType();
+		int type = getCommand();
+		String brand = getToken("Enter appliance brand name");
+		String modelName = getToken("Enter model of appliance");
 		int quantity = getNumber("Enter number of washers");
 		int customerID = getNumber("Enter customer ID");
-		business.purchase(brand, modelName, quantity, customerID);
+		double capacity;
+		double BTU;
+		double repairPlanCost;
+
+		switch (type) {
+		case 1:
+		case 2:
+			repairPlanCost = getDouble("Enter cost of repair plan");
+			business.purchase(brand, modelName, quantity, customerID, type, 0, 0);
+			break;
+		case 3:
+		case 4:
+			business.purchase(brand, modelName, quantity, customerID, type, 0, 0);
+			break;
+		case 5:
+			capacity = getDouble("Enter capacity of refigerator");
+			business.purchase(brand, modelName, quantity, customerID, type, capacity, 0);
+			break;
+		case 6:
+			BTU = getDouble("Enter maximum heating output of range");
+			business.purchase(brand, modelName, quantity, customerID, type, 0, BTU);
+			break;
+		}
 	}
 
 	/**
@@ -268,9 +356,9 @@ public class UserInterface {
 	 * 
 	 * @return list of washers
 	 */
-	public void listWashers() {
+	public void listAppliances() {
 		String result;
-		result = business.listWashers();
+		result = business.listAppliances();
 		System.out.println(result);
 	}
 
@@ -295,6 +383,9 @@ public class UserInterface {
 		int customerID = getNumber("Enter customer ID");
 		String brand = getToken("Enter appliance brand name");
 		String modelName = getToken("Enter appliance model");
+		String result;
+		result = business.enrollInRepairPlan(brand, modelName, customerID);
+		System.out.println(result);
 	}
 
 	/**
@@ -306,6 +397,9 @@ public class UserInterface {
 		int customerID = getNumber("Enter customer ID");
 		String brand = getToken("Enter appliance brand name");
 		String modelName = getToken("Enter appliance model");
+		String result;
+		result = business.enrollInRepairPlan(brand, modelName, customerID);
+		System.out.println(result);
 	}
 
 	/**
@@ -314,7 +408,7 @@ public class UserInterface {
 	 */
 
 	public void billRepairPlan() {
-
+		business.billRepairPlans();
 	}
 
 	/**
@@ -324,6 +418,7 @@ public class UserInterface {
 
 	public void listRepairPlan() {
 		String result;
+		result = business.listAllUsersInRepairPlan();
 		System.out.println(result);
 	}
 
@@ -334,6 +429,7 @@ public class UserInterface {
 
 	public void listBackorders() {
 		String result;
+		result = business.listAllBackorders();
 		System.out.println(result);
 	}
 
@@ -387,7 +483,7 @@ public class UserInterface {
 				addCustomer();
 				break;
 			case ADD_APPLIANCE:
-				addWasher();
+				addAppliance();
 				break;
 			case ADD_TO_INVENTORY:
 				addToInventory();
@@ -399,7 +495,7 @@ public class UserInterface {
 				listCustomers();
 				break;
 			case LIST_APPLIANCES:
-				listWashers();
+				listAppliances();
 				break;
 			case DISPLAY_TOTAL:
 				displayTotal();

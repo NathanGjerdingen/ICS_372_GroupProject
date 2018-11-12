@@ -35,10 +35,12 @@ public class Business implements Serializable {
 	private double repairPlanTotalSales = 0;
 
 	public static final int WASHER = 1;
-	public static final int DRYER = 2;
-	public static final int REFRIDGERATOR = 3;
-	public static final int FURNACE = 4;
-	public static final int STOVE = 5;
+	public static final int DISHWASHER = 2;
+	public static final int DRYER = 3;
+	public static final int STOVE = 4;
+	public static final int REFRIDGERATOR = 5;
+	public static final int FURNACE = 6;
+
 	GenericItemFactory factory = GenericItemFactory.instance();
 
 	private Business() {
@@ -127,7 +129,8 @@ public class Business implements Serializable {
 	 * @param quantity
 	 * @return String if it was successful or not
 	 */
-	public String addToInventory(String brand, String modelName, int quantity, int type, double capacity, double BTU, double repairPlanCost) {
+	public String addToInventory(String brand, String modelName, int quantity, int type, double capacity, double BTU,
+			double repairPlanCost) {
 		// TODO: figure out if leaving 0 for price works
 		GenericItem newModel = factory.createGenericItem(type, brand, modelName, 0, capacity, BTU, repairPlanCost);
 		for (GenericItem item : itemList) {
@@ -322,11 +325,11 @@ public class Business implements Serializable {
 	}
 
 	public String listAllUsersInRepairPlan() {
-		if(repairPlanList.isEmpty()) {
+		if (repairPlanList.isEmpty()) {
 			return "There are no repair plans currently";
 		}
 
-		String listString ="";
+		String listString = "";
 		for (RepairPlan repairPlan : repairPlanList) {
 
 			GenericItem planItem = repairPlan.getItem();
