@@ -111,12 +111,14 @@ public class Business implements Serializable {
 		for (GenericItem item : itemList) {
 			if (item.equals(newModel)) {
 				// fail
-				return "The Brand: " + brand + ", Model: " + modelName + " is already in the catalogue of washers.";
+				return "The type: " + typeToString(type) + " The Brand: " + brand + ", Model: " + modelName
+						+ " is already in the list of items.";
 			}
 		}
 		itemList.add(newModel);
 		// Success
-		return "The Brand: " + brand + ", Model: " + modelName + " has been added to the list of washers.";
+		return "The type: " + typeToString(type) + " The Brand: " + brand + ", Model: " + modelName
+				+ " has been added to the list of items.";
 
 	}
 
@@ -345,13 +347,33 @@ public class Business implements Serializable {
 	}
 
 	public void listAllBackorders() {
-		
+
 		for (GenericItem item : itemList) {
 			if (item.getObjectID() != FURNACE) {
 				item.accept(printFormatter);
-				}
 			}
 		}
+	}
+
+	private String typeToString(int type) {
+
+		switch (type) {
+		case 1:
+			return "Washer";
+		case 2:
+			return "Dishwasher";
+		case 3:
+			return "Dryer";
+		case 4:
+			return "Range";
+		case 5:
+			return "Refrigerator";
+		case 6:
+			return "Furnace";
+		}
+
+		return "invalid type";
+	}
 
 	/**
 	 * saves the current business object to disk at the source folder under the name

@@ -237,7 +237,7 @@ public class UserInterface {
 		case 2:
 			repairPlanCost = getDouble("Enter cost of repair plan");
 			result = business.addAModel(brand, modelName, price, type, 0, 0, repairPlanCost);
-			System.out.println(result);
+			System.out.println(result + " Dishwwasher" );
 			break;
 		case 3:
 		case 4:
