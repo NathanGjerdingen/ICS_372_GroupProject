@@ -276,7 +276,7 @@ public class Business implements Serializable {
 	 */
 	public String displayTotalSales() {
 		// Displays the total sales
-		return "The total sales is: $" + totalSales + "/n The total repair plan profit is: " + repairPlanTotalSales;
+		return "The total sales is: $" + totalSales + " The total repair plan profit is: " + repairPlanTotalSales;
 	}
 
 	public String enrollInRepairPlan(String brand, String modelName, int customerID) {
@@ -325,11 +325,13 @@ public class Business implements Serializable {
 				Washer item = (Washer) planItem;
 				double newTotal = item.getRepairPlanCost() + planCustomer.getCustomerRepairPlanBalance();
 				planCustomer.setCustomerRepairPlanBalance(newTotal);
+				repairPlanTotalSales = item.getRepairPlanCost() + repairPlanTotalSales;
 				return true;
 			} else {
 				Dryer item = (Dryer) planItem;
 				double newTotal = item.getRepairPlanCost() + planCustomer.getCustomerRepairPlanBalance();
 				planCustomer.setCustomerRepairPlanBalance(newTotal);
+				repairPlanTotalSales = item.getRepairPlanCost() + repairPlanTotalSales;
 				return true;
 			}
 
