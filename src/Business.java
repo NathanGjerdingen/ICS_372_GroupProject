@@ -42,6 +42,7 @@ public class Business implements Serializable {
 	public static final int FURNACE = 6;
 
 	GenericItemFactory factory = GenericItemFactory.instance();
+	PrintFormatter printFormatter = new PrintFormatter();
 
 	private Business() {
 
@@ -343,20 +344,14 @@ public class Business implements Serializable {
 		return listString;
 	}
 
-	public String listAllBackorders() {
-		String holdListString = "";
+	public void listAllBackorders() {
+		
 		for (GenericItem item : itemList) {
 			if (item.getObjectID() != FURNACE) {
-				for (Hold hold : item.getHoldQueue()) {
-					// TODO: implement hold toString
-					holdListString = hold.toString() + "/n";
+				item.accept(printFormatter);
 				}
 			}
-			// if there are holds
-			return holdListString;
 		}
-		return "There are no current holds";
-	}
 
 	/**
 	 * saves the current business object to disk at the source folder under the name

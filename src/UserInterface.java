@@ -432,9 +432,7 @@ public class UserInterface {
 	 */
 
 	public void listBackorders() {
-		String result;
-		result = business.listAllBackorders();
-		System.out.println(result);
+		business.listAllBackorders();
 	}
 
 	/**
