@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class GenericItemFactory {
+public class GenericItemFactory implements Serializable {
 	
 	private static GenericItemFactory factory;
 

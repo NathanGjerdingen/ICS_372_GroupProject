@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class PrintFormatter implements GenericItemVisitor {
+public class PrintFormatter implements GenericItemVisitor, Serializable {
 	private Queue<Hold> holdQueue;
 
 	@Override
