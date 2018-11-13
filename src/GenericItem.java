@@ -112,7 +112,7 @@ public abstract class GenericItem implements Serializable {
 		return false;
 	}
 
-//	public void accept(LoanableItemVisitor visitor) {
-//		visitor.visit(this);
-//	}
+	public void accept(GenericItemVisitor visitor) {
+		visitor.visit(this);
+	}
 }
