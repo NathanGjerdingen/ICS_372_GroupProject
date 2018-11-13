@@ -19,5 +19,15 @@ public class Dishwasher extends GenericItem{
 	public String toString() {
 		return "Dishwasher " + super.toString();
 	}
+	
+	@Override
+	public int getObjectID() {
+		return OBJECT_ID;
+	}
+	
+	@Override
+	public void accept(GenericItemVisitor visitor) {
+		visitor.visit(this);
+	}
 
 }

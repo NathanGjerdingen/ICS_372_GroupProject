@@ -46,6 +46,10 @@ public class Washer extends GenericItem implements Serializable {
 	public String toString() {
 		return "Washer " + super.toString();
 	}
+	@Override
+	public int getObjectID() {
+		return OBJECT_ID;
+	}
 
 	public double getRepairPlanCost() {
 		return repairPlanCost;
@@ -53,6 +57,10 @@ public class Washer extends GenericItem implements Serializable {
 
 	public void setRepairPlanCost(double repairPlanCost) {
 		this.repairPlanCost = repairPlanCost;
+	}
+	@Override
+	public void accept(GenericItemVisitor visitor) {
+		visitor.visit(this);
 	}
 	
 }

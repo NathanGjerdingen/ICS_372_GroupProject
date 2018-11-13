@@ -176,7 +176,7 @@ public class UserInterface {
 		System.out.println(EXIT + " to Exit\n");
 		System.out.println(ADD_CUSTOMER + " to add a customer");
 		System.out.println(ADD_APPLIANCE + " to add an appliance");
-		System.out.println(ADD_TO_INVENTORY + " to add appliacnes to the inventory");
+		System.out.println(ADD_TO_INVENTORY + " to add appliances to the inventory");
 		System.out.println(PURCHASE + " to purchase an appliance ");
 		System.out.println(LIST_CUSTOMERS + " to view a list of customers ");
 		System.out.println(LIST_APPLIANCES + " to view a list of all appliances");
@@ -319,12 +319,10 @@ public class UserInterface {
 		int customerID = getNumber("Enter customer ID");
 		double capacity;
 		double BTU;
-		double repairPlanCost;
 
 		switch (type) {
 		case 1:
 		case 2:
-			repairPlanCost = getDouble("Enter cost of repair plan");
 			business.purchase(brand, modelName, quantity, customerID, type, 0, 0);
 			break;
 		case 3:
@@ -362,7 +360,16 @@ public class UserInterface {
 	 */
 	public void listAppliances() {
 		String result;
-		result = business.listAppliances();
+		if(yesOrNo("Would you like to print a specific appliance?")) {
+			System.out.println("What type of appliance?");
+			applianceType();
+			int type = getCommand();
+			//list target appliance
+			result = business.listAppliances(type);
+		}else {
+			//list all appliances
+			result = business.listAppliances(0);
+		}
 		System.out.println(result);
 	}
 

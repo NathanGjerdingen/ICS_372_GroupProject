@@ -27,5 +27,13 @@ public class Dryer extends GenericItem {
 	public void setRepairPlanCost(double repairPlanCost) {
 		this.repairPlanCost = repairPlanCost;
 	}
+	@Override
+	public int getObjectID() {
+		return OBJECT_ID;
+	}
+	@Override
+	public void accept(GenericItemVisitor visitor) {
+		visitor.visit(this);
+	}
 
 }

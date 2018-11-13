@@ -17,5 +17,13 @@ public class Stove extends GenericItem {
 	public String toString() {
 		return "Stove " + super.toString();
 	}
+	@Override
+	public int getObjectID() {
+		return OBJECT_ID;
+	}
+	@Override
+	public void accept(GenericItemVisitor visitor) {
+		visitor.visit(this);
+	}
 	
 }

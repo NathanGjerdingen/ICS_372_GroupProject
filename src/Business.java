@@ -245,17 +245,27 @@ public class Business implements Serializable {
 	 * 
 	 * @return Washer List
 	 */
-	public String listAppliances() {
+	public String listAppliances(int type) {
 		// for washers in the washer list, print out the brand, model, price, and stock
 		String itemListString = "";
 		if (itemList.size() == 0) {
-			return "There are currently no washers in the washer list.";
+			return "There are currently no items in the list.";
 		}
-		for (GenericItem item : itemList) {
-			itemListString = itemListString + "Brand: " + item.getBrand() + ", Model: " + item.getModel() + ", Price: $"
-					+ item.getPrice() + ", Stock: " + item.getStock() + "\n";
+		//if 0 is the generic no input print everything
+		if (type == 0) {
+			for (GenericItem item : itemList) {
+				itemListString = itemListString + "Brand: " + item.getBrand() + ", Model: " + item.getModel()
+						+ ", Price: $" + item.getPrice() + ", Stock: " + item.getStock() + "\n";
+			}
+			//else print the item if the object ID is equal to the type
+		} else {
+			for (GenericItem item : itemList) {
+				if (item.getObjectID() == type) {
+					itemListString = itemListString + "Brand: " + item.getBrand() + ", Model: " + item.getModel()
+							+ ", Price: $" + item.getPrice() + ", Stock: " + item.getStock() + "\n";
+				}
+			}
 		}
-		// Return the list of washers
 		return itemListString;
 	}
 

@@ -27,6 +27,14 @@ public class Furnace extends GenericItem {
 	public String toString() {
 		return "Furnace " + super.toString();
 	}
+	@Override
+	public int getObjectID() {
+		return OBJECT_ID;
+	}
+	@Override
+	public void accept(GenericItemVisitor visitor) {
+		visitor.visit(this);
+	}
 
 
 }
