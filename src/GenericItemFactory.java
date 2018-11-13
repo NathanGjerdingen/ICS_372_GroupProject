@@ -19,7 +19,7 @@ public class GenericItemFactory implements Serializable {
 		case Business.WASHER:
 			return new Washer(brand, model, price, repairPlanCost);
 		case Business.DISHWASHER:
-			return new Washer(brand, model, price, repairPlanCost);
+			return new Dishwasher(brand, model, price);
 		case Business.DRYER:
 			return new Dryer(brand, model, price, repairPlanCost);
 		case Business.REFRIDGERATOR:

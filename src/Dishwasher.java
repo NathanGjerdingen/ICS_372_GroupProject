@@ -9,6 +9,7 @@ public class Dishwasher extends GenericItem{
 	 * @param brand
 	 * @param model
 	 * @param price
+	 * @param repairPlanCost 
 	 */
 	public Dishwasher(String brand, String model, double price) {
 		super(brand, model, price);

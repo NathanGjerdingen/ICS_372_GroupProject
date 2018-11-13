@@ -184,7 +184,7 @@ public class UserInterface {
 		System.out.println(ENROLL_REPAIR + " to enroll in a repair plan");
 		System.out.println(WITHDRAW_REPAIR + " to withdraw from a repair plan");
 		System.out.println(BILL_REPAIR + " to bill repair plans");
-		System.out.println(LIST_REPAIR + "to list all users in a repair plan");
+		System.out.println(LIST_REPAIR + " to list all users in a repair plan");
 		System.out.println(LIST_BACKORDER + " to list all backorders");
 		System.out.println(SAVE + " to  save data");
 		System.out.println(HELP + " for help");
@@ -194,7 +194,7 @@ public class UserInterface {
 	 * displays the appliance screen
 	 */
 	public void applianceType() {
-		System.out.println("Enter a number to choose which appliance you would like to use");
+		System.out.println("Enter a number to choose which appliance you would like to input");
 		System.out.println(1 + " Washer");
 		System.out.println(2 + " Dishwasher");
 		System.out.println(3 + " Dryer");
@@ -238,12 +238,17 @@ public class UserInterface {
 
 		switch (type) {
 		case 1:
-		case 2:
 			repairPlanCost = getDouble("Enter cost of repair plan");
 			result = business.addAModel(brand, modelName, price, type, 0, 0, repairPlanCost);
-			System.out.println(result + " Dishwwasher" );
+			System.out.println(result);
+		case 2:
+			result = business.addAModel(brand, modelName, price, type, 0, 0, 0);
+			System.out.println(result);
 			break;
 		case 3:
+			repairPlanCost = getDouble("Enter cost of repair plan");
+			result = business.addAModel(brand, modelName, price, type, 0, 0, repairPlanCost);
+			System.out.println(result);
 		case 4:
 			result = business.addAModel(brand, modelName, price, type, 0, 0, 0);
 			System.out.println(result);
@@ -274,16 +279,15 @@ public class UserInterface {
 		int type = getCommand();
 		String brand = getToken("Enter appliance brand name");
 		String modelName = getToken("Enter model of appliance");
-		int quantity = getNumber("Enter number of appliacnes");
+		int quantity = getNumber("Enter number of appliances");
 		double capacity;
 		double BTU;
-		double repairPlanCost;
 
 		switch (type) {
 		case 1:
 		case 2:
-			repairPlanCost = getDouble("Enter cost of repair plan");
-			result = business.addToInventory(brand, modelName, quantity, type, 0, 0, repairPlanCost);
+			
+			result = business.addToInventory(brand, modelName, quantity, type, 0, 0, 0);
 			System.out.println(result);
 			break;
 		case 3:

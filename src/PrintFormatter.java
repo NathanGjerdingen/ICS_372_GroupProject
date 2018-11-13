@@ -21,7 +21,7 @@ public class PrintFormatter implements GenericItemVisitor, Serializable {
 		System.out.println( "Dish Washer : " + item.getBrand() + " "  + item.getModel());
 		
 		for(Hold hold: holdQueue) {
-			System.out.println("UserID: "+  hold.getCustomer().getCustomerID() + "Item: " + hold.getQuantityRequested());
+			System.out.println("UserID: "+  hold.getCustomer().getCustomerID() + " Item: " + hold.getQuantityRequested());
 		}
 		
 	}

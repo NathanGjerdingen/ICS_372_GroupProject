@@ -349,9 +349,9 @@ public class Business implements Serializable {
 
 			GenericItem planItem = repairPlan.getItem();
 			Customer planCustomer = repairPlan.getCustomer();
-			listString = "Name: " + planCustomer.getName() + " Phone number " + planCustomer.getGetPhoneNumber()
+			listString = "Name: " + planCustomer.getName() + " Phone number: " + planCustomer.getGetPhoneNumber()
 					+ " ID: " + planCustomer.getCustomerID() + " Appliance balance: "
-					+ planCustomer.getCustomerApplianceBalance() + "Repair plan balance "
+					+ planCustomer.getCustomerApplianceBalance() + " Repair plan balance: "
 					+ planCustomer.getCustomerRepairPlanBalance() + " Item brand: " + planItem.getBrand()
 					+ " Item model: " + planItem.getModel();
 		}
