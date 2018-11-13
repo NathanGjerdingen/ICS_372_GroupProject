@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
- * class to implement a command line interface for washer business
+ * class to implement a command line interface for appliance business
  * 
  * @author Tyler Davis
  *
@@ -190,6 +190,9 @@ public class UserInterface {
 		System.out.println(HELP + " for help");
 	}
 
+	/**
+	 * displays the appliance screen
+	 */
 	public void applianceType() {
 		System.out.println("Enter a number to choose which appliance you would like to use");
 		System.out.println(1 + " Washer");
@@ -216,8 +219,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for adding a washer. Prompts the user for the appropriate
-	 * values and uses the appropriate Business method for adding the washer.
+	 * Method to be called for adding an appliance. Prompts the user for the
+	 * appropriate values and uses the appropriate Business method for adding the
+	 * appliance.
 	 * 
 	 * @return return string value that gives user confirmation
 	 */
@@ -301,9 +305,9 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for purchasing a washer. Prompts the user for the
-	 * appropriate values and uses the appropriate Business method for purchasing a
-	 * washer.
+	 * Method to be called for purchasing an appliance. Prompts the user for the
+	 * appropriate values and uses the appropriate Business method for purchasing an
+	 * appliance.
 	 * 
 	 */
 	public void purchase() {
@@ -311,7 +315,7 @@ public class UserInterface {
 		int type = getCommand();
 		String brand = getToken("Enter appliance brand name");
 		String modelName = getToken("Enter model of appliance");
-		int quantity = getNumber("Enter number of washers");
+		int quantity = getNumber("Enter number of appliances");
 		int customerID = getNumber("Enter customer ID");
 		double capacity;
 		double BTU;
@@ -351,8 +355,8 @@ public class UserInterface {
 	}
 
 	/**
-	 * Method to be called for viewing list of washers. uses the appropriate
-	 * Business method to view washers.
+	 * Method to be called for viewing list of appliances. uses the appropriate
+	 * Business method to view appliances.
 	 * 
 	 * @return list of washers
 	 */
