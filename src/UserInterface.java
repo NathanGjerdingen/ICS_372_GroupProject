@@ -286,7 +286,7 @@ public class UserInterface {
 		switch (type) {
 		case 1:
 		case 2:
-			
+
 			result = business.addToInventory(brand, modelName, quantity, type, 0, 0, 0);
 			System.out.println(result);
 			break;
@@ -364,14 +364,14 @@ public class UserInterface {
 	 */
 	public void listAppliances() {
 		String result;
-		if(yesOrNo("Would you like to print a specific appliance?")) {
+		if (yesOrNo("Would you like to print a specific appliance?")) {
 			System.out.println("What type of appliance?");
 			applianceType();
 			int type = getCommand();
-			//list target appliance
+			// list target appliance
 			result = business.listAppliances(type);
-		}else {
-			//list all appliances
+		} else {
+			// list all appliances
 			result = business.listAppliances(0);
 		}
 		System.out.println(result);
@@ -413,7 +413,7 @@ public class UserInterface {
 		String brand = getToken("Enter appliance brand name");
 		String modelName = getToken("Enter appliance model");
 		String result;
-		result = business.enrollInRepairPlan(brand, modelName, customerID);
+		result = business.withdrawFromRepairPlan(brand, modelName, customerID);
 		System.out.println(result);
 	}
 
@@ -423,7 +423,11 @@ public class UserInterface {
 	 */
 
 	public void billRepairPlan() {
-		business.billRepairPlans();
+		if(business.billRepairPlans() == true) {
+			System.out.println("The repair plans have been billed");
+		}else {
+			System.out.println("There are no repair plans to bill currently");
+		}
 	}
 
 	/**

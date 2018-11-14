@@ -1,11 +1,12 @@
 /**
- * Class to represent a Stove. Attributes of the class are: brand,
- * model, and price.
+ * Class to represent a Stove. Attributes of the class are: brand, model, and
+ * price.
  * 
+ * @author Nathan B, Sang, Nathan G
  */
 @SuppressWarnings("serial")
 public class Stove extends GenericItem {
-	
+
 	private final int OBJECT_ID = 4;
 
 	/**
@@ -26,7 +27,7 @@ public class Stove extends GenericItem {
 	public String toString() {
 		return "Stove " + super.toString();
 	}
-	
+
 	/**
 	 * Return Stove object ID number
 	 */
@@ -34,7 +35,7 @@ public class Stove extends GenericItem {
 	public int getObjectID() {
 		return OBJECT_ID;
 	}
-	
+
 	/**
 	 * Creates a visitor of type Stove
 	 */
@@ -42,5 +43,5 @@ public class Stove extends GenericItem {
 	public void accept(GenericItemVisitor visitor) {
 		visitor.visit(this);
 	}
-	
+
 }

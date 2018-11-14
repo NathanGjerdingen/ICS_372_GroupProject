@@ -1,14 +1,15 @@
 /**
- * Class to represent a refrigerator. Attributes of the class are: brand,
- * model, price, and repairPlanCost.
+ * Class to represent a refrigerator. Attributes of the class are: brand, model,
+ * price, and repairPlanCost.
  * 
+ * @author Nathan B, Sang, Nathan G
  */
 @SuppressWarnings("serial")
 public class Dryer extends GenericItem {
 
 	private final int OBJECT_ID = 3;
 	private double repairPlanCost;
-	
+
 	/**
 	 * Constructor for Dryer that takes 3 parameters
 	 * 
@@ -46,7 +47,7 @@ public class Dryer extends GenericItem {
 	public void setRepairPlanCost(double repairPlanCost) {
 		this.repairPlanCost = repairPlanCost;
 	}
-	
+
 	/**
 	 * Return Dryer's object ID number
 	 */
@@ -54,7 +55,7 @@ public class Dryer extends GenericItem {
 	public int getObjectID() {
 		return OBJECT_ID;
 	}
-	
+
 	/**
 	 * Creates a visitor of type Dryer
 	 */

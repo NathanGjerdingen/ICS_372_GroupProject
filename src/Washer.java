@@ -3,8 +3,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Class to represent a refrigerator. Attributes of the class are: brand,
- * model, price, and repairPlanCost.
+ * Class to represent a refrigerator. Attributes of the class are: brand, model,
+ * price, and repairPlanCost.
  * 
  */
 @SuppressWarnings("serial")
@@ -12,7 +12,7 @@ public class Washer extends GenericItem implements Serializable {
 
 	private final int OBJECT_ID = 1;
 	private double repairPlanCost;
-	
+
 	/**
 	 * Washer takes in a brand, modelName, price when instantiated. Stock is set to
 	 * 1 immediately, because when introducing a new washer to the system you will
@@ -45,7 +45,7 @@ public class Washer extends GenericItem implements Serializable {
 	public String toString() {
 		return "Washer " + super.toString();
 	}
-	
+
 	/**
 	 * Return Washer's object ID number
 	 */
@@ -71,7 +71,7 @@ public class Washer extends GenericItem implements Serializable {
 	public void setRepairPlanCost(double repairPlanCost) {
 		this.repairPlanCost = repairPlanCost;
 	}
-	
+
 	/**
 	 * Create a visitor of type Washer
 	 */
@@ -79,5 +79,5 @@ public class Washer extends GenericItem implements Serializable {
 	public void accept(GenericItemVisitor visitor) {
 		visitor.visit(this);
 	}
-	
+
 }

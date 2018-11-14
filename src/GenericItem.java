@@ -4,9 +4,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Class to represent a generic item. Attributes of the class are: brand,
- * model, price, capacity, and stock.
+ * Class to represent a generic item. Attributes of the class are: brand, model,
+ * price, capacity, and stock.
  * 
+ * @author Nathan B, Sang, Nathan G
  */
 public abstract class GenericItem implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -32,10 +33,10 @@ public abstract class GenericItem implements Serializable {
 		this.capacity = 0;
 		this.stock = 1;
 	}
-	
+
 	/**
-	 * Overloaded constructor for generic item that has 4 parameters,
-	 * mainly used for refridgerator class
+	 * Overloaded constructor for generic item that has 4 parameters, mainly used
+	 * for refridgerator class
 	 * 
 	 * @param brand
 	 * @param model
@@ -49,7 +50,7 @@ public abstract class GenericItem implements Serializable {
 		this.capacity = capacity;
 		this.stock = 1;
 	}
-	
+
 	/**
 	 * Returns the Hold queue
 	 * 
@@ -58,7 +59,7 @@ public abstract class GenericItem implements Serializable {
 	public Queue<Hold> getHoldQueue() {
 		return holdQueue;
 	}
-	
+
 	/**
 	 * Return the object ID number
 	 * 
@@ -76,7 +77,7 @@ public abstract class GenericItem implements Serializable {
 	public String getModel() {
 		return model;
 	}
-	
+
 	/**
 	 * Return the brand
 	 * 
@@ -94,7 +95,7 @@ public abstract class GenericItem implements Serializable {
 	public double getPrice() {
 		return price;
 	}
-	
+
 	/**
 	 * Return the stock amount
 	 * 
@@ -103,7 +104,7 @@ public abstract class GenericItem implements Serializable {
 	public int getStock() {
 		return stock;
 	}
-	
+
 	/**
 	 * Return the capacity
 	 * 
@@ -112,7 +113,7 @@ public abstract class GenericItem implements Serializable {
 	public int getCapacity() {
 		return capacity;
 	}
-	
+
 	/**
 	 * Set the stock
 	 * 
@@ -138,8 +139,7 @@ public abstract class GenericItem implements Serializable {
 	 * @return true if successful, false if failed
 	 */
 	public boolean removeHold(int memberId) {
-		for (Iterator<Hold> iterator = holdQueue.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<Hold> iterator = holdQueue.iterator(); iterator.hasNext();) {
 			Hold hold = iterator.next();
 			int id = hold.getCustomer().getCustomerID();
 			if (id == memberId) {
@@ -189,7 +189,7 @@ public abstract class GenericItem implements Serializable {
 			return "[brand= " + brand + ",model=" + model + ", capacity= " + capacity + ", price= " + price + "]";
 		}
 	}
-	
+
 	/**
 	 * Check if two item are equal
 	 * 

@@ -42,7 +42,7 @@ public class Business implements Serializable {
 	public static final int FURNACE = 6;
 
 	GenericItemFactory factory = GenericItemFactory.instance();
-	PrintFormatter printFormatter = new PrintFormatter();
+	PrintFormatter printFormatter = PrintFormatter.instance();
 
 	private Business() {
 
@@ -251,13 +251,13 @@ public class Business implements Serializable {
 		if (itemList.size() == 0) {
 			return "There are currently no items in the list.";
 		}
-		//if 0 is the generic no input print everything
+		// if 0 is the generic no input print everything
 		if (type == 0) {
 			for (GenericItem item : itemList) {
 				itemListString = itemListString + "Brand: " + item.getBrand() + ", Model: " + item.getModel()
 						+ ", Price: $" + item.getPrice() + ", Stock: " + item.getStock() + "\n";
 			}
-			//else print the item if the object ID is equal to the type
+			// else print the item if the object ID is equal to the type
 		} else {
 			for (GenericItem item : itemList) {
 				if (item.getObjectID() == type) {
@@ -298,6 +298,17 @@ public class Business implements Serializable {
 		return "No repair plan was enrolled as the Brand, ModelName, or customer ID is invalid";
 	}
 
+	/**
+	 * The system goes through each repair plan and checks if the customer and item
+	 * match the item they wish to withdraw from If it finds it, it removes the
+	 * repair plan and says it was successful. If it does not find the item it
+	 * returns that it was not successful for that user.
+	 * 
+	 * @param brand
+	 * @param modelName
+	 * @param customerID
+	 * @return String
+	 */
 	public String withdrawFromRepairPlan(String brand, String modelName, int customerID) {
 		for (RepairPlan repairPlan : repairPlanList) {
 
@@ -315,6 +326,13 @@ public class Business implements Serializable {
 
 	}
 
+	/**
+	 * Goes through all the repair plans, makes sure the object is either a washer
+	 * or drier then bills the customer accordingly then returns true. Otherwise it
+	 * returns false if there are no repair plans.
+	 * 
+	 * @return Boolean
+	 */
 	public boolean billRepairPlans() {
 
 		for (RepairPlan repairPlan : repairPlanList) {
@@ -339,6 +357,12 @@ public class Business implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Lists all users in repair plans by iterating over them and gathering the
+	 * information from them
+	 * 
+	 * @return String of users in repair plans
+	 */
 	public String listAllUsersInRepairPlan() {
 		if (repairPlanList.isEmpty()) {
 			return "There are no repair plans currently";
@@ -358,6 +382,11 @@ public class Business implements Serializable {
 		return listString;
 	}
 
+	/**
+	 * List all back orders goes through the itemlist and sends the visitor to each
+	 * to get its information as long as it is not a furnace as furnaces do not have
+	 * back orders.
+	 */
 	public void listAllBackorders() {
 
 		for (GenericItem item : itemList) {
@@ -367,6 +396,13 @@ public class Business implements Serializable {
 		}
 	}
 
+	/**
+	 * Utility function that checks what type it is and returns the correct string
+	 * representation of the appliance.
+	 * 
+	 * @param type
+	 * @return String
+	 */
 	private String typeToString(int type) {
 
 		switch (type) {

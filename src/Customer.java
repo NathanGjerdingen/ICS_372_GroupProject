@@ -97,19 +97,38 @@ public class Customer implements Serializable {
 		this.customerID = customerID;
 	}
 
-	
+	/**
+	 * Gets the customer balance for appliances
+	 * 
+	 * @return customerApplianceBalance
+	 */
 	public double getCustomerApplianceBalance() {
 		return customerApplianceBalance;
 	}
 
+	/**
+	 * Sets the customerApplianceBalance
+	 * 
+	 * @param customerApplianceBalance
+	 */
 	public void setCustomerApplianceBalance(double customerApplianceBalance) {
 		this.customerApplianceBalance = customerApplianceBalance;
 	}
 
+	/**
+	 * Gets the repair plan balance for a customer
+	 * 
+	 * @return customerRepairPlanBalance
+	 */
 	public double getCustomerRepairPlanBalance() {
 		return customerRepairPlanBalance;
 	}
 
+	/**
+	 * Sets the repair plan balance for a customer
+	 * 
+	 * @param customerRepairPlanBalance
+	 */
 	public void setCustomerRepairPlanBalance(double customerRepairPlanBalance) {
 		this.customerRepairPlanBalance = customerRepairPlanBalance;
 	}
@@ -118,8 +137,8 @@ public class Customer implements Serializable {
 	 * Method to determine if Customers are the "same". this method looks at name
 	 * and phoneNumber to determine "sameness".
 	 * 
-	 * @param c
-	 * @return
+	 * @param Customer C
+	 * @return Boolean
 	 */
 	public boolean equals(Customer c) {
 		if (this.getName().equals(c.getName()) && this.getGetPhoneNumber().equals(c.getGetPhoneNumber())) {
@@ -127,7 +146,5 @@ public class Customer implements Serializable {
 		}
 		return false;
 	}
-
-	
 
 }

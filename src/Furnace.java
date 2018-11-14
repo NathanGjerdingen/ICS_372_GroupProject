@@ -1,14 +1,15 @@
 /**
- * Class to represent a refrigerator. Attributes of the class are: brand,
- * model, price, and BTU.
+ * Class to represent a refrigerator. Attributes of the class are: brand, model,
+ * price, and BTU.
  * 
+ * @author Nathan B, Sang, Nathan G
  */
 @SuppressWarnings("serial")
 public class Furnace extends GenericItem {
 
 	private final int OBJECT_ID = 6;
 	private double britishThermalUnits;
-	
+
 	/**
 	 * Constructor for Furnace that takes 3 parameters
 	 * 
@@ -28,7 +29,7 @@ public class Furnace extends GenericItem {
 	public String toString() {
 		return "Furnace " + super.toString();
 	}
-	
+
 	/**
 	 * Return Furnace object ID number
 	 */
@@ -36,7 +37,7 @@ public class Furnace extends GenericItem {
 	public int getObjectID() {
 		return OBJECT_ID;
 	}
-	
+
 	/**
 	 * Create a visitor of type Furnace
 	 */
@@ -44,6 +45,5 @@ public class Furnace extends GenericItem {
 	public void accept(GenericItemVisitor visitor) {
 		visitor.visit(this);
 	}
-
 
 }
