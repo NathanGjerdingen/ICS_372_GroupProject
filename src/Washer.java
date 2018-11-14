@@ -3,12 +3,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Class to represent a Washing Machine. Attributes of the class are: brand,
- * modelName, and price, and stock.
+ * Class to represent a refrigerator. Attributes of the class are: brand,
+ * model, price, and repairPlanCost.
  * 
- * @author Nathan C. Bishop
- * @author Nathan Gjerdingen
- * @author Sang Ngo
  */
 @SuppressWarnings("serial")
 public class Washer extends GenericItem implements Serializable {
@@ -41,23 +38,43 @@ public class Washer extends GenericItem implements Serializable {
 		super(brand, model, 0);
 	}
 
-	
+	/**
+	 * toString to print Washer's details
+	 */
 	@Override
 	public String toString() {
 		return "Washer " + super.toString();
 	}
+	
+	/**
+	 * Return Washer's object ID number
+	 */
 	@Override
 	public int getObjectID() {
 		return OBJECT_ID;
 	}
 
+	/**
+	 * Return Washers repair plan cost
+	 * 
+	 * @return repairPlanCost
+	 */
 	public double getRepairPlanCost() {
 		return repairPlanCost;
 	}
 
+	/**
+	 * Sets Washer's repair plan cost
+	 * 
+	 * @param repairPlanCost
+	 */
 	public void setRepairPlanCost(double repairPlanCost) {
 		this.repairPlanCost = repairPlanCost;
 	}
+	
+	/**
+	 * Create a visitor of type Washer
+	 */
 	@Override
 	public void accept(GenericItemVisitor visitor) {
 		visitor.visit(this);

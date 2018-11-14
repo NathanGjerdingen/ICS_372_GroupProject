@@ -2,6 +2,11 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * 
+ * Class to print out the item description and any hold that it might have.
+ *
+ */
 public class PrintFormatter implements GenericItemVisitor, Serializable {
 	private Queue<Hold> holdQueue;
 
