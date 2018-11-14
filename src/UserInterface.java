@@ -241,6 +241,7 @@ public class UserInterface {
 			repairPlanCost = getDouble("Enter cost of repair plan");
 			result = business.addAModel(brand, modelName, price, type, 0, 0, repairPlanCost);
 			System.out.println(result);
+			break;
 		case 2:
 			result = business.addAModel(brand, modelName, price, type, 0, 0, 0);
 			System.out.println(result);
@@ -249,6 +250,7 @@ public class UserInterface {
 			repairPlanCost = getDouble("Enter cost of repair plan");
 			result = business.addAModel(brand, modelName, price, type, 0, 0, repairPlanCost);
 			System.out.println(result);
+			break;
 		case 4:
 			result = business.addAModel(brand, modelName, price, type, 0, 0, 0);
 			System.out.println(result);
