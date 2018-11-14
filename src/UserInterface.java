@@ -172,8 +172,8 @@ public class UserInterface {
 	 * 
 	 */
 	public void help() {
-		System.out.println("Enter a number between 0 and 12 as explained below:");
-		System.out.println(EXIT + " to Exit\n");
+		System.out.println("Enter a number between 0 and 12 as explained below:\n");
+		System.out.println(EXIT + " to Exit");
 		System.out.println(ADD_CUSTOMER + " to add a customer");
 		System.out.println(ADD_APPLIANCE + " to add an appliance");
 		System.out.println(ADD_TO_INVENTORY + " to add appliances to the inventory");
@@ -194,7 +194,7 @@ public class UserInterface {
 	 * displays the appliance screen
 	 */
 	public void applianceType() {
-		System.out.println("Enter a number to choose which appliance you would like to input");
+		System.out.println("\nEnter a number to choose which appliance you would like to input\n");
 		System.out.println(1 + " Washer");
 		System.out.println(2 + " Dishwasher");
 		System.out.println(3 + " Dryer");
