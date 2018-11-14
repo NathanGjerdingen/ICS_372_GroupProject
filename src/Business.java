@@ -20,12 +20,6 @@ public class Business implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<Customer> customerList = new ArrayList<Customer>();
-
-	/*
-	 * FUTURE ISSUE: Eventually, we'll need to change the Washer list to an
-	 * ItemList. When iterating over this list for items, we'll need a way to
-	 * diserce a "Washer" from a "Dryer" from a "Furnace" and ect.
-	 */
 	private List<GenericItem> itemList = new ArrayList<GenericItem>();
 	private List<RepairPlan> repairPlanList = new ArrayList<RepairPlan>();
 
